@@ -73,7 +73,7 @@ Replace DirectApi.ashx with the value of `apiUrl` that you used in Web.config.
 Ext.Direct.addProvider(Ext.app.REMOTING_API);
 }}}
 
-3. Write controller and actions as usual, but make sure the actions return an instance of `DirectResult` class. For your convenience I have created a bunch of helper extension methods for Controller class, such as Direct and DirectForm, so to return data from a controller action you can use the following syntax:
+3. Write controller and actions as usual, but make sure the actions return an instance of `DirectResult` class. For your convenience I have created a bunch of helper extension methods for Controller class, such as Direct() and DirectForm(), so to return data from a controller action you can use the following syntax:
 {{{
 using Ext.Direct.Mvc;
 ...
@@ -146,4 +146,4 @@ Ext.Direct.on('exception', function(e) {
 
 == Server-side events ==
 
-Ext.Direct supports custom server-side events. You can return a custom event object from the server by calling one of the DirectEvent extension methods of Controller class and handle it on the client as described in the documentation to Ext.Direct class in "Server side events" section: http://www.extjs.com/deploy/dev/docs/?class=Ext.Direct
+Ext.Direct supports custom server-side events. You can return a custom event object from the server by calling one of the DirectEvent() extension methods of Controller class and handle it on the client as described in the documentation to Ext.Direct class in "Server side events" section: http://www.extjs.com/deploy/dev/docs/?class=Ext.Direct
