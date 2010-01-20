@@ -102,7 +102,7 @@ YourNamespace.Sample.DoSomething(...);
 
 6. `[DirectIgnore]` attribute should be used to mark controllers or individual actions, that are not meant to be used by Ext.Direct. This attribute instructs Ext.Direct.Mvc to completely ignore the marked types, so no client-side stubs will be created for them.
 
-7. `[ActionName]` attribute can be used on actions to instruct Ext.Direct.Mvc to use a different name for the marked action when creating client-side stub. It useful if you want to have overloaded actions in a controller. If you mark an action with this attribute, make sure you use the specified name when calling the method from your JS code.
+7. `[ActionName]` attribute can be used to assign an alias to an action. It instructs Ext.Direct.Mvc to use the specified alias instead of action name when creating client-side stub for an action marked with this attribute. It is useful if you want to have overloaded actions in a controller. If you mark an action with this attribute, make sure you use the specified name when calling the method from your JS code.
 
 == Server-side exceptions ==
 
