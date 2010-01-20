@@ -1,4 +1,4 @@
-#summary How to configure and use Ext.Direct.Mvc.
+#summary How to configure and use Ext.Direct.Mvc library.
 #labels Featured,Phase-Deploy,Phase-Implementation
 
 == Introduction ==
