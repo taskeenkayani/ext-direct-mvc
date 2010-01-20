@@ -1,0 +1,149 @@
+#summary How to configure and use Ext.Direct.Mvc.
+#labels Featured,Phase-Deploy,Phase-Implementation
+
+== Introduction ==
+
+To start using Ext.Direct.Mvc [http://code.google.com/p/ext-direct-mvc/downloads/list download] the binaries, extract the DLLs to the bin folder of your ASP.NET MVC web project and reference them. I recommend that you read everything on this page to avoid any potential problems you may run into.
+
+Here is a quick explanation of how Ext.Direct.Mvc works. Once you have configured everything correctly in Web.config, as described below, and included API via a script tag, the API component of Ext.Direct.Mvc will create client-side stubs from controllers and actions, that are not marked with `[DirectIgnore]` attribute. Then you can seamlessly call your server-side methods as if they were client-side methods.
+Read further for details.
+
+== Requirements ==
+
+  * .NET 3.5 Framework
+  * [http://www.asp.net/mvc/ ASP.NET MVC v1.0] installed on your system
+  * Json.NET 3.5 Release 6 (included)
+
+== Configuration ==
+
+In your Web.config file you need to add `ext.direct` section and register `DirectHttpModule`:
+{{{
+<configuration>
+    <configSections>
+        <section name="ext.direct" type="Ext.Direct.Mvc.Configuration.DirectSection, Ext.Direct.Mvc"/>
+    </configSections>
+    <ext.direct
+        providerName="Ext.app.REMOTING_API"
+        apiUrl="DirectApi.ashx"
+        routerUrl="DirectRouter.ashx"
+        assembly="MyMvcProject"
+        dateFormat="Iso"
+    />
+    ...
+    <system.web>
+        <httpModules>
+            <add name="DirectHttpModule" type="Ext.Direct.Mvc.DirectHttpModule, Ext.Direct.Mvc"/>
+        </httpModules>
+    </system.web>
+    ...
+    <!-- 
+        Required if you intend to run your application under IIS 7.0
+    -->
+    <system.webServer>
+        <modules runAllManagedModulesForAllRequests="true">
+            <add name="DirectHttpModule" type="Ext.Direct.Mvc.DirectHttpModule, Ext.Direct.Mvc"/>
+        </modules>
+        ...
+    </system.webServer>
+</configuration>
+}}}
+`ext.direct` section is where you specify configuration options for the provider. Available options are:
+
+  * `providerName` - Required. Name for the generated API provider config.
+  * `apiUrl` - Required. URL that will return the generated API method configurations.
+  * `routerUrl` - Required. URL of the provider. Ext.Direct will post all the requests to this URL.
+  * `assembly` - Required. Name of the assembly that contains the controllers to generate API, usually the name of your MVC web project assembly.
+  * `namespace` - Optional. Namespace for the provider.
+  * `buffer` - Optional. Amount of time in milliseconds to wait before sending a batched request. Default to 10.
+  * `dateFormat` - Optional. Format to use by default when serializing dates. Supported values are "Iso" and "JavaScript". If not set or has value other than supported, then M$ format is used by default.
+  * `debug` - Optional. Boolean that indicates whether to include full stack trace in the exception response when an intercepted server exception is returned to the client. Default to false. This option should never be set to true in production environment because of security concerns. Read about handling exceptions in the "Server-side Exceptions" section below.
+
+For `apiUrl` and `routerUrl` options I recommend that you use known ASP.NET file extensions, such as .ashx, to avoid unnecessary problems with IIS if you decide to use it. For example, you `apiUrl` can have .js extension if you think it makes more sense, since it returns JS code. But you shouldn't use .js file extension for the `routerUrl` because IIS blocks POST requests to a .js files by default.
+
+== Usage ==
+
+1. Include the API component via a script tag in the head of your main application page. The server-side will dynamically generate JavaScript code to be executed on the client-side. The path should be relative to the root of your app:
+{{{
+<script type="text/javascript" src="<%= Url.Content("~/DirectApi.ashx") %>"></script>
+}}}
+Replace DirectApi.ashx with the value of `apiUrl` that you used in Web.config.
+
+2. The API component outputs an object literal of method configurations with the name that you used for `providerName` option in your Web.config (in this example Ext.app.REMOTING_API), so to register the provider you add the following code in your application's initialization function:
+{{{
+Ext.Direct.addProvider(Ext.app.REMOTING_API);
+}}}
+
+3. Write controller and actions as usual, but make sure the actions return an instance of `DirectResult` class. For your convenience I have created a bunch of helper extension methods for Controller class, such as Direct() and DirectForm(), so to return data from a controller action you can use the following syntax:
+{{{
+using Ext.Direct.Mvc;
+...
+public ActionResult MyMethod() {
+    // You logic here
+    return this.Direct(yourReturnValue);
+}
+}}}
+The return value is serialized to json by Newtonsoft Json.NET library, which is included in the downloaded archive.
+
+Any controller is considered a Direct controller unless it is marked with `[DirectIgnore]` attribute. Although not required, it is highly recommended that you mark non-direct controllers with this attribute, so that Ext.Direct.Mvc will completely ignore them and the actions they contain.
+
+4. To call a server-side method from your Ext JS code use syntax similar to this:
+{{{
+Sample.DoSomething(arg1, arg2, function(result, response) {
+    // process the result
+});
+}}}
+Where `Sample` maps to `SampleController` class and `DoSomething` to an action in that controller.
+And if you specified a value for the `namespace` option in the Web.config, then your call will look something like this:
+{{{
+YourNamespace.Sample.DoSomething(...);
+}}}
+
+5. `[FormHandler]` attribute *must* be used to mark controller actions, that will be used to process form submits. If you fail to do so, Ext.Direct will send a regular POST request (as opposed to form POST request) to this action, and you can have hard time trying to figure out why it is doing it. Please keep it in mind.
+
+6. `[DirectIgnore]` attribute should be used to mark controllers or individual actions, that are not meant to be used by Ext.Direct. This attribute instructs Ext.Direct.Mvc to completely ignore the marked types, so no client-side stubs will be created for them.
+
+7. `[ActionName]` attribute can be used on actions to instruct Ext.Direct.Mvc to use a different name for the marked action when creating client-side stub. It useful if you want to have overloaded actions in a controller. If you mark an action with this attribute, make sure you use the specified name when calling the method from your JS code.
+
+== Server-side exceptions ==
+
+By default no server-side exception are intercepted except the special `DirectException`. When a `DirectException` is thrown on the server, a direct response of type "exception" is returned to the client.
+It is possible, however, to intercept all server-side exceptions in a controller or a single action and return them to the client as exception response. To do this you need to mark either the whole controller or individual actions with `[DirectHandleError]` attribute. Like this:
+{{{
+[DirectHandleError]
+public ActionResult MyAction() {
+    // ...
+    throw new Exception("Something bad happened!");
+    // ...
+}
+}}}
+Exception response on the client can contain the following members:
+
+  * `type` - "exception"
+  * `tid` - The transaction id
+  * `action` - The action that has been called
+  * `method` - The method that has been called
+  * `message` - The error message
+  * `where` - The full stack trace from the server only if `debug` configuration option is `true`
+  * `result` - Simple object with only "success" boolean property for form posts only
+  * `errorData` - User-defined information about the exception only if provided
+
+The `errorData` is copied from Exception.Data. To read about Exception.Data and how to set it see http://msdn.microsoft.com/en-us/library/system.exception.data.aspx
+
+You can handle a server-side exception on the client either in an individual callback function
+{{{
+Sample.DoSomething(arg1, arg2, function(result, response) {
+    if (response.type == "exception") {
+        ...
+    }
+});
+}}}
+or globally
+{{{
+Ext.Direct.on('exception', function(e) {
+    alert(e.message);
+});
+}}}
+
+== Server-side events ==
+
+Ext.Direct supports custom server-side events. You can return a custom event object from the server by calling one of the DirectEvent() extension methods of Controller class and handle it on the client as described in the documentation to Ext.Direct class in "Server side events" section: http://www.extjs.com/deploy/dev/docs/?class=Ext.Direct
