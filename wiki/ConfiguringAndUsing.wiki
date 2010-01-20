@@ -98,7 +98,7 @@ And if you specified a value for the `namespace` option in the Web.config, then 
 YourNamespace.Sample.DoSomething(...);
 }}}
 
-5. `[FormHandler]` attribute *must* be used to mark controller actions, that will be used to process form submits. If you fail to do so, Ext.Direct will send a regular POST request (as opposed to form POST request) to this action, and you can have hard time trying to figure out why it is doing it. Please keep it in mind.
+5. `[FormHandler]` attribute _must_ be used to mark controller actions, that will be called to process form submits. If you fail to do so, Ext.Direct will send a regular POST request (as opposed to Form POST) to this action, and you can have hard time trying to figure out why it is doing it. Please keep it in mind.
 
 6. `[DirectIgnore]` attribute should be used to mark controllers or individual actions, that are not meant to be used by Ext.Direct. This attribute instructs Ext.Direct.Mvc to completely ignore the marked types, so no client-side stubs will be created for them.
 
