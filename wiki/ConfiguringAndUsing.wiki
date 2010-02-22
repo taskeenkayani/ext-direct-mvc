@@ -50,7 +50,7 @@ Available options for `ext.direct` section are:
 Ext.Direct.addProvider(Ext.app.REMOTING_API);
 }}}
 
-3. Write controller and actions as usual, but make sure the actions return an instance of `DirectResult` class. For your convenience I have created a bunch of helper extension methods for Controller class, such as Direct() and DirectForm(), so to return data from a controller action you can use the following syntax:
+3. Write controller and actions as usual, but make sure the actions return an instance of `DirectResult` class. For your convenience I have created a few overloaded helper extension methods called `Direct()` for Controller class, so to return data from a controller action you can use the following syntax:
 {{{
 using Ext.Direct.Mvc;
 
