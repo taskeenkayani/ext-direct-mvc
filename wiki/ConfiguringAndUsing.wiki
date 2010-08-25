@@ -10,9 +10,9 @@ Read further for details.
 
 == Requirements ==
 
-  * .NET 3.5 Framework
+  * Visual Studio 2010 with .NET 4.0 Framework
   * [http://www.asp.net/mvc/ ASP.NET MVC]
-  * Json.NET 3.5 Release 6 (included)
+  * Json.NET 3.5 Release 8 (included)
 
 == Configuration ==
 
