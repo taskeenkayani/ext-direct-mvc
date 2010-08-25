@@ -1,10 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ext.Direct.Mvc", "Ext.Direct.Mvc\Ext.Direct.Mvc.csproj", "{BAE22E76-F2A1-4DDE-9F96-23D7005149D6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ext.Direct.Mvc.Demo", "Ext.Direct.Mvc.Demo\Ext.Direct.Mvc.Demo.csproj", "{62B0A82E-AAB9-4EC1-BE1E-E35CF5765F1F}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{429EE6C8-A6B8-4CB1-ABB0-6BCDA60B83D4}"
 	ProjectSection(SolutionItems) = preProject
 		Lib\Newtonsoft.Json.dll = Lib\Newtonsoft.Json.dll
@@ -22,6 +18,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MVC 2.0", "MVC 2.0", "{B29E
 		Lib\MVC 2.0\System.Web.Mvc.dll = Lib\MVC 2.0\System.Web.Mvc.dll
 		Lib\MVC 2.0\System.Web.Mvc.xml = Lib\MVC 2.0\System.Web.Mvc.xml
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ext.Direct.Mvc", "Ext.Direct.Mvc\Ext.Direct.Mvc.csproj", "{BAE22E76-F2A1-4DDE-9F96-23D7005149D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ext.Direct.Mvc.Demo", "Ext.Direct.Mvc.Demo\Ext.Direct.Mvc.Demo.csproj", "{62B0A82E-AAB9-4EC1-BE1E-E35CF5765F1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
