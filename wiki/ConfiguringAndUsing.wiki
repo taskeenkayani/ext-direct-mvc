@@ -86,6 +86,8 @@ YourNamespace.Employees.Get(...);
 
 7. `[ActionName]` attribute can be used to assign an alias to an action. It instructs Ext.Direct.Mvc to use the specified alias instead of action name when creating client-side stub for an action marked with this attribute. It is useful if you want to have overloaded actions in a controller. If you mark an action with this attribute, make sure you use the specified name when calling the method from your JS code.
 
+*IMPORTANT:* If you created you MVC project from an MVC Web Application template, it will contain two default controllers - HomeController and AccountController. In most cases you will not want client-side proxy methods to be generated for these controllers, so if you keep them in your project, DO NOT FORGET to mark them with `[DirectIgnore]` attribute to avoid problems. At the very least the AccountController, since it contains duplicate action names.
+
 == Server-side exceptions ==
 
 By default no server-side exception are intercepted except the special `DirectException`. When a `DirectException` is thrown on the server, a direct response of type "exception" is returned to the client.
