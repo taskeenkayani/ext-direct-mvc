@@ -40,31 +40,7 @@ namespace Ext.Direct.Mvc {
             }
 
             if (!directRequest.IsFormPost && directRequest.Data != null) {
-                CultureInfo invariantCulture = CultureInfo.InvariantCulture;
-                var valueProvider = new ValueProviderDictionary(null);
-
-                object[] data = directRequest.Data;
-
-                for (int i = 0; i < parameterDescriptors.Length; i++) {
-                    object rawValue = data[i];
-
-                    if (rawValue != null) {
-                        Type vType = rawValue.GetType();
-                        Type pType = parameterDescriptors[i].ParameterType;
-
-                        // Deserialize only objects and arrays and let MVC handle everything else.
-                        if (vType == typeof(JObject) && pType != typeof(JObject) ||
-                            vType == typeof(JArray) && pType != typeof(JArray)) {
-
-                            rawValue = JsonConvert.DeserializeObject(rawValue.ToString(), pType);
-                        }
-                    }
-
-                    string attemptedValue = Convert.ToString(rawValue, invariantCulture);
-                    valueProvider.Add(parameterDescriptors[i].ParameterName, new ValueProviderResult(rawValue, attemptedValue, invariantCulture));
-                }
-
-                controllerContext.Controller.ValueProvider = valueProvider;
+                controllerContext.Controller.ValueProvider = new DirectValueProvider(directRequest.Data, parameterDescriptors);
             }
 
             foreach (ParameterDescriptor parameterDescriptor in parameterDescriptors) {
