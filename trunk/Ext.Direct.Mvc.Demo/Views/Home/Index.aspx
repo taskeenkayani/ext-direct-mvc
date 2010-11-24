@@ -4,12 +4,12 @@
 <head runat="server">
     <title>Ext.Direct.Mvc Demo Application</title>
     
-    <link rel="Stylesheet" type="text/css" href="http://extjs.cachefly.net/ext-3.2.1/resources/css/ext-all.css" />
-    <script type="text/javascript" src="http://extjs.cachefly.net/ext-3.2.1/adapter/ext/ext-base.js"></script>
-    <script type="text/javascript" src="http://extjs.cachefly.net/ext-3.2.1/ext-all.js"></script>
+    <link rel="Stylesheet" type="text/css" href="http://extjs.cachefly.net/ext-3.3.0/resources/css/ext-all.css" />
+    <script type="text/javascript" src="http://extjs.cachefly.net/ext-3.3.0/adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="http://extjs.cachefly.net/ext-3.3.0/ext-all-debug.js"></script>
     
-    <link rel="Stylesheet" type="text/css" href="http://extjs.cachefly.net/ext-3.2.1/examples/ux/fileuploadfield/css/fileuploadfield.css" />
-    <script type="text/javascript" src="http://extjs.cachefly.net/ext-3.2.1/examples/ux/fileuploadfield/FileUploadField.js"></script>
+    <link rel="Stylesheet" type="text/css" href="http://extjs.cachefly.net/ext-3.3.0/examples/ux/fileuploadfield/css/fileuploadfield.css" />
+    <script type="text/javascript" src="http://extjs.cachefly.net/ext-3.3.0/examples/ux/fileuploadfield/FileUploadField.js"></script>
     
     <script type="text/javascript" src="<% = Url.Content("~/Source/App.js") %>"></script>
     <script type="text/javascript" src="<% = Url.Content("~/Source/SimpleTestPanel.js") %>"></script>
