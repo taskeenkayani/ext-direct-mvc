@@ -47,6 +47,10 @@ namespace Ext.Direct.Mvc.Configuration {
             get { return _directSection.Namespace; }
         }
 
+        public static DescriptorGeneration DescriptorGeneration {
+            get { return _directSection.DescriptorGeneration; }
+        }
+
         public static string Assembly {
             get { return _directSection.Assembly; }
         }
