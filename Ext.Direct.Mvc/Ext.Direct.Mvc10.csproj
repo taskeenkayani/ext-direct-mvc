@@ -79,7 +79,9 @@
   <ItemGroup>
     <Compile Include="Attributes\DirectHandleErrorAttribute.cs" />
     <Compile Include="Attributes\DirectIgnoreAttribute.cs" />
+    <Compile Include="Attributes\DirectIncludeAttribute.cs" />
     <Compile Include="Configuration\DirectConfig.cs" />
+    <Compile Include="DescriptorGeneration.cs" />
     <Compile Include="DirectAction.cs" />
     <Compile Include="DirectController.cs" />
     <Compile Include="DirectErrorResponse.cs" />
