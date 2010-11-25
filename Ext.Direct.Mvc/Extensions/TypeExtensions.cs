@@ -22,13 +22,19 @@
 namespace Ext.Direct.Mvc {
     using System;
     using System.Web.Mvc;
+    using Ext.Direct.Mvc.Configuration;
 
     internal static class TypeExtensions {
 
         internal static bool IsDirectAction(this Type type) {
             bool isController = type.IsSubclassOf(typeof(Controller));
-            bool ignored = type.HasAttribute<DirectIgnoreAttribute>();
-            return (isController && !type.IsAbstract && !ignored);
+            if (DirectConfig.DescriptorGeneration == DescriptorGeneration.OptOut) {
+                bool ignored = type.HasAttribute<DirectIgnoreAttribute>();
+                return (isController && !type.IsAbstract && !ignored);
+            } else {
+                bool included = type.HasAttribute<DirectIncludeAttribute>();
+                return (isController && !type.IsAbstract && included);
+            }            
         }
 
         internal static bool HasAttribute<T>(this Type type) where T : Attribute {

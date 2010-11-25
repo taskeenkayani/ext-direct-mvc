@@ -23,6 +23,7 @@ namespace Ext.Direct.Mvc {
     using System;
     using System.Web.Mvc;
     using System.Reflection;
+    using Ext.Direct.Mvc.Configuration;
 
     internal static class MethodExtensions {
 
@@ -34,8 +35,13 @@ namespace Ext.Direct.Mvc {
         internal static bool IsDirectMethod(this MethodInfo method) {
             // Any controller action is a Direct method unless marked with DirectIgnoreAttribute
             bool returnsActionResult = (method.ReturnType == typeof(ActionResult) || method.ReturnType.IsSubclassOf(typeof(ActionResult)));
-            bool ignore = method.HasAttribute<DirectIgnoreAttribute>();
-            return (returnsActionResult && !ignore);
+            if (DirectConfig.DescriptorGeneration == DescriptorGeneration.OptOut) {
+                bool ignore = method.HasAttribute<DirectIgnoreAttribute>();
+                return (returnsActionResult && !ignore);
+            } else {
+                bool included = method.HasAttribute<DirectIncludeAttribute>();
+                return (returnsActionResult && included);
+            }
         }
 
         internal static bool IsFormHandler(this MethodBase method) {

@@ -40,6 +40,11 @@ namespace Ext.Direct.Mvc.Configuration {
             get { return (string)this["namespace"]; }
         }
 
+        [ConfigurationProperty("descriptorGeneration", IsRequired = false, DefaultValue = DescriptorGeneration.OptOut)]
+        public DescriptorGeneration DescriptorGeneration {
+            get { return (DescriptorGeneration)this["descriptorGeneration"]; }
+        }
+
         [ConfigurationProperty("buffer", IsRequired = false, DefaultValue = null)]
         public int? Buffer {
             get { return (int?)this["buffer"]; }
