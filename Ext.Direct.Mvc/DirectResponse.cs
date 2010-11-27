@@ -20,7 +20,6 @@
  * ***************************************************************************/
 
 namespace Ext.Direct.Mvc {
-    using System;
     using Newtonsoft.Json;
 
     public class DirectResponse : DirectResponseBase {

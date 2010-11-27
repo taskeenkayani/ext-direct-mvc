@@ -21,11 +21,11 @@
 
 namespace Ext.Direct.Mvc {
     using System;
-    using System.Web;
-    using System.Text;
     using System.IO;
-    using Newtonsoft.Json;
+    using System.Text;
+    using System.Web;
     using Ext.Direct.Mvc.Configuration;
+    using Newtonsoft.Json;
 
     [JsonObject]
     public abstract class DirectResponseBase {

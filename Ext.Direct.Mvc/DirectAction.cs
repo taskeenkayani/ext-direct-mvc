@@ -22,14 +22,49 @@
 namespace Ext.Direct.Mvc {
     using System;
     using System.Collections.Generic;
-    using Newtonsoft.Json;
+    using System.Linq;
+    using System.Reflection;
+    using System.Web.Mvc;
+    using Ext.Direct.Mvc.Configuration;
     using Ext.Direct.Mvc.Resources;
+    using Newtonsoft.Json;
 
     internal class DirectAction {
 
         private readonly IDictionary<string, DirectMethod> _methods;
 
-        internal DirectAction(Type type) {
+        internal string Name {
+            get;
+            private set;
+        }
+
+        internal static DirectAction Create(Type type) {
+            if (type.IsSubclassOf(typeof(Controller))) {
+                DirectAction action = null;
+                if (DirectConfig.DescriptorGeneration == DescriptorGeneration.OptOut) {
+                    if (!type.HasAttribute<DirectIgnoreAttribute>()) {
+                        action = new DirectAction(type);
+                    }
+                } else {
+                    action = new DirectAction(type);
+                    if (!type.HasAttribute<DirectIncludeAttribute>() && action.MethodCount == 0) {
+                        action = null;
+                    }
+                }
+                return action;
+            }
+            return null;
+        }
+
+        private int MethodCount {
+            get {
+                return _methods.Count();
+            }
+        }
+
+        // Private constructor.
+        // This class can only be instantiated by the static Create method above
+        private DirectAction(Type type) {
             this.Name = type.Name;
             if (this.Name.EndsWith("Controller")) {
                 this.Name = this.Name.Substring(0, this.Name.IndexOf("Controller"));
@@ -38,25 +73,7 @@ namespace Ext.Direct.Mvc {
             ConfigureMethods(type);
         }
 
-        internal string Name {
-            get;
-            private set;
-        }
-
-        // Adds class methods (controller actions) to the internal collection
-        private void ConfigureMethods(Type type) {
-            var methods = type.GetMethods();
-            foreach (var method in methods) {
-                if (method.IsDirectMethod()) {
-                    string name = method.GetName();
-                    if (_methods.ContainsKey(name)) {
-                        throw new Exception(String.Format(DirectResources.DirectAction_MethodExists, name, this.Name));
-                    }
-                    _methods.Add(name, new DirectMethod(method));
-                }
-            }
-        }
-
+        // Returns a configured Direct method by name
         internal DirectMethod GetMethod(string name) {
             return _methods.ContainsKey(name) ? _methods[name] : null;
         }
@@ -71,5 +88,34 @@ namespace Ext.Direct.Mvc {
             }
             jsonWriter.WriteEndArray();
         }
+
+        private void ConfigureMethods(Type type) {
+            MethodInfo[] methods = type.GetMethods();
+            foreach (var mi in methods) {
+                bool returnsActionResult = (mi.ReturnType == typeof(ActionResult) || mi.ReturnType.IsSubclassOf(typeof(ActionResult)));
+
+                // In order for a class method to be a Direct method, it must be a controller action, i.e. return ActionResult
+                if (returnsActionResult) {
+                    DirectMethod method = null;
+
+                    if (DirectConfig.DescriptorGeneration == DescriptorGeneration.OptOut) {
+                        if (!mi.HasAttribute<DirectIgnoreAttribute>()) {
+                            method = new DirectMethod(mi);
+                        }
+                    } else if (type.HasAttribute<DirectIncludeAttribute>() || mi.HasAttribute<DirectIncludeAttribute>()) {
+                        method = new DirectMethod(mi);
+                    }
+
+                    if (method != null) {
+                        string name = method.Name;
+                        if (_methods.ContainsKey(name)) {
+                            throw new Exception(String.Format(DirectResources.DirectAction_MethodExists, name, this.Name));
+                        }
+                        _methods.Add(name, method);
+                    }
+                }
+            }
+        }
+
     }
 }

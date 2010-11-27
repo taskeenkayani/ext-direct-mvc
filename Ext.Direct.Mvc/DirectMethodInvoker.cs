@@ -22,10 +22,7 @@
 namespace Ext.Direct.Mvc {
     using System;
     using System.Collections.Generic;
-    using System.Globalization;
     using System.Web.Mvc;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
     using Ext.Direct.Mvc.Resources;
 
     public class DirectMethodInvoker : ControllerActionInvoker {
