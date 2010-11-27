@@ -24,7 +24,6 @@ namespace Ext.Direct.Mvc {
     using System.Collections.Generic;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
-    using System.Diagnostics;
 
     internal class RequestDataConverter : JsonConverter {
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) {

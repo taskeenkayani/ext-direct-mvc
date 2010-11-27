@@ -83,8 +83,8 @@ namespace Ext.Direct.Mvc {
                     Assembly assembly = Assembly.Load(assemblyName);
                     var types = assembly.GetTypes();
                     foreach (var type in types) {
-                        if (type.IsDirectAction()) {
-                            var action = new DirectAction(type);
+                        var action = DirectAction.Create(type);
+                        if (action != null) {
                             if (_actions.ContainsKey(action.Name)) {
                                 throw new Exception(String.Format(DirectResources.DirectProvider_ActionExists, action.Name));
                             }

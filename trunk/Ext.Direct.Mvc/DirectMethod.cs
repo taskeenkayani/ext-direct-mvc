@@ -20,16 +20,17 @@
  * ***************************************************************************/
 
 namespace Ext.Direct.Mvc {
-    using System;
     using System.Reflection;
+    using System.Web.Mvc;
     using Newtonsoft.Json;
 
     internal class DirectMethod {
 
         internal DirectMethod(MethodBase method) {
-            this.Name = method.GetName();
+            var attr = method.GetAttribute<ActionNameAttribute>();
+            this.Name = attr != null ? attr.Name : method.Name;
             this.Len = method.GetParameters().Length;
-            this.IsFormHandler = method.IsFormHandler();
+            this.IsFormHandler = method.HasAttribute<FormHandlerAttribute>();
         }
 
         internal string Name {

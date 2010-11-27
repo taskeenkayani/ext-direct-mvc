@@ -23,8 +23,8 @@ namespace Ext.Direct.Mvc {
     using System;
     using System.Text;
     using System.Web.Mvc;
-    using Newtonsoft.Json;
     using Ext.Direct.Mvc.Resources;
+    using Newtonsoft.Json;
 
     public static class ControllerExtensions {
 

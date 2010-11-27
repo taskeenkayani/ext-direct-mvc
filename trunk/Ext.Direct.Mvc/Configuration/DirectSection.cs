@@ -20,7 +20,6 @@
  * ***************************************************************************/
 
 namespace Ext.Direct.Mvc.Configuration {
-    using System;
     using System.Configuration;
 
     public class DirectSection : ConfigurationSection {

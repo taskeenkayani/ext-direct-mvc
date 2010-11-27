@@ -20,7 +20,6 @@
  * ***************************************************************************/
 
 namespace Ext.Direct.Mvc {
-    using System;
     using System.Web.Mvc;
 
     public class DirectController : Controller {

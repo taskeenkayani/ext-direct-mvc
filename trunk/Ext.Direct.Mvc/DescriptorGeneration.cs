@@ -20,7 +20,6 @@
  * ***************************************************************************/
 
 namespace Ext.Direct.Mvc {
-    using System;
 
     /// <summary>
     /// Specifies client-side descriptor generation option.

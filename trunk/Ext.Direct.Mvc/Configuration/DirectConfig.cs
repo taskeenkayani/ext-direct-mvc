@@ -22,9 +22,9 @@
 namespace Ext.Direct.Mvc.Configuration {
     using System;
     using System.Configuration;
+    using Ext.Direct.Mvc.Resources;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
-    using Ext.Direct.Mvc.Resources;
 
     public class DirectConfig {
 
