@@ -23,9 +23,8 @@ namespace Ext.Direct.Mvc {
     using System;
     using System.Web;
     using System.Web.Mvc;
-    using Ext.Direct.Mvc.Resources;
-    using Newtonsoft.Json;
     using Ext.Direct.Mvc.Configuration;
+    using Newtonsoft.Json;
 
     public class DirectResult : JsonResult {
 
@@ -40,16 +39,10 @@ namespace Ext.Direct.Mvc {
             }
 
             HttpResponseBase httpResponse = context.HttpContext.Response;
-
-            var directRequest = context.HttpContext.Items[DirectRequest.DirectRequestKey] as DirectRequest;
+            DirectRequest directRequest = context.HttpContext.Items[DirectRequest.DirectRequestKey] as DirectRequest;
 
             if (directRequest != null) {
-                var directResponse = new DirectResponse(directRequest) {
-                    Result = this.Data,
-                    Settings = this.Settings
-                };
-
-                directResponse.Write(httpResponse, ContentType, ContentEncoding);
+                this.WriteResponse(directRequest, httpResponse);
             } else {
                 // Allow regular response when the action is not called through Ext Direct
                 using (JsonWriter writer = new JsonTextWriter(httpResponse.Output)) {
@@ -63,6 +56,15 @@ namespace Ext.Direct.Mvc {
                     serializer.Serialize(writer, Data);
                 }
             }
+        }
+
+        public virtual void WriteResponse(DirectRequest directRequest, HttpResponseBase httpResponse) {
+            var directResponse = new DirectResponse(directRequest) {
+                Result = this.Data,
+                Settings = this.Settings
+            };
+
+            directResponse.Write(httpResponse, this.ContentType, this.ContentEncoding);
         }
     }
 }

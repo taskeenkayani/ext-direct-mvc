@@ -27,48 +27,21 @@ namespace Ext.Direct.Mvc {
     using Newtonsoft.Json;
     using Ext.Direct.Mvc.Configuration;
 
-    public class DirectEventResult : JsonResult {
+    public class DirectEventResult : DirectResult {
 
         public string Name {
             get;
             set;
         }
 
-        public JsonSerializerSettings Settings {
-            get;
-            set;
-        }
+        public override void WriteResponse(DirectRequest directRequest, HttpResponseBase httpResponse) {
+            var eventResponse = new DirectEventResponse(directRequest) {
+                Name = this.Name,
+                Data = this.Data,
+                Settings = this.Settings
+            };
 
-        public override void ExecuteResult(ControllerContext context) {
-            if (context == null) {
-                throw new ArgumentNullException("context");
-            }
-
-            HttpResponseBase httpResponse = context.HttpContext.Response;
-
-            var directRequest = context.HttpContext.Items[DirectRequest.DirectRequestKey] as DirectRequest;
-
-            if (directRequest != null) {
-                var eventResponse = new DirectEventResponse(directRequest) {
-                    Name = this.Name,
-                    Data = this.Data,
-                    Settings = this.Settings
-                };
-
-                eventResponse.Write(httpResponse, ContentType, ContentEncoding);
-            } else {
-                // Allow regular response when the action is not called through Ext Direct
-                using (JsonWriter writer = new JsonTextWriter(httpResponse.Output)) {
-                    JsonSerializer serializer = JsonSerializer.Create(this.Settings);
-
-                    if (DirectConfig.DefaultDateTimeConverter != null) {
-                        serializer.Converters.Add(DirectConfig.DefaultDateTimeConverter);
-                    }
-
-                    writer.Formatting = DirectConfig.Debug ? Formatting.Indented : Formatting.None;
-                    serializer.Serialize(writer, Data);
-                }
-            }
+            eventResponse.Write(httpResponse, this.ContentType, this.ContentEncoding);
         }
     }
 }
