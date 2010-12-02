@@ -136,4 +136,4 @@ Ext.Direct.on('exception', function(e) {
 
 == Server-side events ==
 
-Ext.Direct supports custom server-side events. You can return a custom event object from the server by calling one of the DirectEvent() extension methods of Controller class and handle it on the client as described in the documentation to Ext.Direct class in "Server side events" section: http://www.extjs.com/deploy/dev/docs/?class=Ext.Direct
+Ext.Direct supports custom server-side events. You can return a custom event object from the server by calling one of the DirectEvent() extension methods of Controller class and handle it on the client as described in the documentation to Ext.Direct class in "Server side events" section: http://dev.sencha.com/deploy/dev/docs/?class=Ext.Direct
