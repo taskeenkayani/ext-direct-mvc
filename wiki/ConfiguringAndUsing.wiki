@@ -10,9 +10,10 @@ Read further for details.
 
 == Requirements ==
 
-  * Visual Studio 2010 with .NET 4.0 Framework
+  * .NET 3.5
   * [http://www.asp.net/mvc/ ASP.NET MVC]
   * Json.NET 3.5 Release 8 (included)
+  * Visual Studio 2010 (if you want to run the demo app)
 
 == Configuration ==
 
@@ -32,8 +33,11 @@ In your Web.config file add `ext.direct` section as follows:
 Available options for `ext.direct` section are:
 
   * `providerName` - *Required*. Name for the generated API provider config.
-  * `assembly` - *Required*. Name of the assembly that contains the controllers to generate API, usually the name of your MVC web project assembly. *NEW IN v2.0.0:* Support for multiple assemblies. Specify assembly names separated by commas.
+  * `assembly` - *Required*. Name of the assembly that contains the controllers to generate API, usually the name of your MVC web project assembly. Multiple assembly names can be separated by commas.
   * `namespace` - Optional. Namespace for the provider.
+  * `descriptorGeneration` - Optional. Specifies client-side descriptors generation options. The value is case-sensitive and can be one of the following:
+    * `OptOut` - Default. Client-side descriptors are generated for all controller actions. Undesired controllers or actions can be excluded using the `DirectIgnoreAttribute`.
+    * `OptIn` - Client-side descriptors are generated only for controllers and actions marked with the `DirectIncludeAttribute`.
   * `buffer` - Optional. Amount of time in milliseconds to wait before sending a batched request. Default to 10.
   * `dateFormat` - Optional. Format to use by default when serializing dates. Supported values are "Iso" and "JavaScript". If not set or has value other than supported, then M$ format is used by default.
   * `debug` - Optional. Boolean that indicates whether to include full stack trace in the exception response when an intercepted server exception is returned to the client. Default to false. This option should never be set to true in production environment because of security concerns. Read about handling exceptions in the "Server-side Exceptions" section below.
@@ -66,7 +70,8 @@ namespace MyMvcApplication {
 }}}
 The return value is serialized to json by Newtonsoft Json.NET library, which is included in the downloaded archive.
 
-Any controller is considered a Direct controller unless it is marked with `[DirectIgnore]` attribute. Although not required, it is highly recommended that you mark non-direct controllers (such as the default HomeController) with this attribute, so that Ext.Direct.Mvc will completely ignore them and the actions they contain.
+By default Ext.Direct.Mvc generates client-side descriptors using OptOut method. It means that descriptors will be generated for all controllers and actions except those marked with `[DirectIgnore]` attribute. You can change the descriptor generation method to OptIn in your configuration file as described in Configuration section above. This way client-side descriptors will be generated only for controllers or actions marked with `[DirectInclude]` attribute.
+If you use the the default OptOut method, it is highly recommended that you mark controllers that will never be used by Ext Direct, such as the default HomeController or AccountController, with `[DirectIgnore]` attribute, so that Ext.Direct.Mvc will completely ignore them and the actions they contain.
 
 4. To call a server-side method from your Ext JS code use syntax similar to this:
 {{{
