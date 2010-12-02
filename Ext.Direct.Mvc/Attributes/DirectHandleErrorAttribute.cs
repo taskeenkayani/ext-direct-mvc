@@ -35,8 +35,7 @@ namespace Ext.Direct.Mvc {
                 return;
             }
 
-            Exception exception = filterContext.Exception;
-
+            var exception = filterContext.Exception;
             var directRequest = filterContext.HttpContext.Items[DirectRequest.DirectRequestKey] as DirectRequest;
 
             if (directRequest != null) {

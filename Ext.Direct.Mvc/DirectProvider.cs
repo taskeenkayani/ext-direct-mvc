@@ -78,11 +78,11 @@ namespace Ext.Direct.Mvc {
         public void Configure() {
             if (!this.Configured) {
                 string[] assemblyNames = DirectConfig.Assembly.Split(',');
-                for (int i = 0; i < assemblyNames.Length; i++) {
-                    string assemblyName = assemblyNames[i].Trim();
+                foreach (string t in assemblyNames) {
+                    string assemblyName = t.Trim();
                     Assembly assembly = Assembly.Load(assemblyName);
-                    var types = assembly.GetTypes();
-                    foreach (var type in types) {
+                    Type[] types = assembly.GetTypes();
+                    foreach (Type type in types) {
                         var action = DirectAction.Create(type);
                         if (action != null) {
                             if (_actions.ContainsKey(action.Name)) {
@@ -122,7 +122,7 @@ namespace Ext.Direct.Mvc {
                 }
                 jsonWriter.WritePropertyName("actions");
                 jsonWriter.WriteStartObject();
-                foreach (var action in _actions.Values) {
+                foreach (DirectAction action in _actions.Values) {
                     action.WriteJson(jsonWriter);
                 }
                 jsonWriter.WriteEndObject();
@@ -149,13 +149,13 @@ namespace Ext.Direct.Mvc {
                 // Raw HTTP Post request(s)
 
                 var reader = new StreamReader(httpContext.Request.InputStream, new UTF8Encoding());
-                var json = reader.ReadToEnd();
+                string json = reader.ReadToEnd();
 
                 if (json.StartsWith("[") && json.EndsWith("]")) {
                     // Batch of requests
                     var requests = JsonConvert.DeserializeObject<List<DirectRequest>>(json);
                     httpContext.Response.Write("[");
-                    foreach (var request in requests) {
+                    foreach (DirectRequest request in requests) {
                         ExecuteRequest(requestContext, request);
                         if (request != requests[requests.Count - 1]) {
                             httpContext.Response.Write(",");
@@ -169,7 +169,6 @@ namespace Ext.Direct.Mvc {
                 }
             } else {
                 // Form Post request
-
                 var request = new DirectRequest(httpContext.Request);
                 ExecuteRequest(requestContext, request);
             }

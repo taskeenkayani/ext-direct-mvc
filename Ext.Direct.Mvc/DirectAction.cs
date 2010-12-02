@@ -91,7 +91,7 @@ namespace Ext.Direct.Mvc {
 
         private void ConfigureMethods(Type type) {
             MethodInfo[] methods = type.GetMethods();
-            foreach (var mi in methods) {
+            foreach (MethodInfo mi in methods) {
                 bool returnsActionResult = (mi.ReturnType == typeof(ActionResult) || mi.ReturnType.IsSubclassOf(typeof(ActionResult)));
 
                 // In order for a class method to be a Direct method, it must be a controller action, i.e. return ActionResult

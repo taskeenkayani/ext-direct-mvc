@@ -27,7 +27,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Ext.Direct.Mvc")]
-[assembly: AssemblyDescription("Ext.Direct server-side stack for ASP.NET MVC")]
+[assembly: AssemblyDescription("Ext.Direct server-side stack for ASP.NET MVC 1.0")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Ext.Direct.Mvc")]
