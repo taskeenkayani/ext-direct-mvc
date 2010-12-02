@@ -33,7 +33,7 @@ namespace Ext.Direct.Mvc {
         internal static T GetAttribute<T>(this MethodBase method) where T : Attribute {
             T attribute = null;
             var attributes = (T[])method.GetCustomAttributes(typeof(T), true);
-            if (attributes != null && attributes.Length > 0) {
+            if (attributes.Length > 0) {
                 attribute = attributes[0];
             }
             return attribute;

@@ -28,9 +28,9 @@ namespace Ext.Direct.Mvc {
     public class DirectMethodInvoker : ControllerActionInvoker {
 
         protected override IDictionary<string, object> GetParameterValues(ControllerContext controllerContext, ActionDescriptor actionDescriptor) {
-            Dictionary<string, object> parametersDict = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
+            var directRequest = controllerContext.HttpContext.Items[DirectRequest.DirectRequestKey] as DirectRequest;
+            var parametersDict = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
             ParameterDescriptor[] parameterDescriptors = actionDescriptor.GetParameters();
-            DirectRequest directRequest = controllerContext.HttpContext.Items[DirectRequest.DirectRequestKey] as DirectRequest;
 
             if (directRequest == null) {
                 throw new NullReferenceException(DirectResources.Common_DirectRequestIsNull);

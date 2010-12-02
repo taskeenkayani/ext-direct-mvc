@@ -39,22 +39,13 @@ namespace Ext.Direct.Mvc {
             }
 
             HttpResponseBase httpResponse = context.HttpContext.Response;
-            DirectRequest directRequest = context.HttpContext.Items[DirectRequest.DirectRequestKey] as DirectRequest;
+            var directRequest = context.HttpContext.Items[DirectRequest.DirectRequestKey] as DirectRequest;
 
             if (directRequest != null) {
                 this.WriteResponse(directRequest, httpResponse);
             } else {
                 // Allow regular response when the action is not called through Ext Direct
-                using (JsonWriter writer = new JsonTextWriter(httpResponse.Output)) {
-                    JsonSerializer serializer = JsonSerializer.Create(this.Settings);
-
-                    if (DirectConfig.DefaultDateTimeConverter != null) {
-                        serializer.Converters.Add(DirectConfig.DefaultDateTimeConverter);
-                    }
-
-                    writer.Formatting = DirectConfig.Debug ? Formatting.Indented : Formatting.None;
-                    serializer.Serialize(writer, Data);
-                }
+                this.WriteContent(httpResponse);
             }
         }
 
@@ -65,6 +56,31 @@ namespace Ext.Direct.Mvc {
             };
 
             directResponse.Write(httpResponse, this.ContentType, this.ContentEncoding);
+        }
+
+        private void WriteContent(HttpResponseBase response) {
+            if (!String.IsNullOrEmpty(this.ContentType)) {
+                response.ContentType = this.ContentType;
+            }
+            if (this.ContentEncoding != null) {
+                response.ContentEncoding = this.ContentEncoding;
+            }
+            if (this.Data != null) {
+                if (this.Data is String) {
+                    response.Write(this.Data);
+                } else {
+                    using (JsonWriter writer = new JsonTextWriter(response.Output)) {
+                        JsonSerializer serializer = JsonSerializer.Create(this.Settings);
+
+                        if (DirectConfig.DefaultDateTimeConverter != null) {
+                            serializer.Converters.Add(DirectConfig.DefaultDateTimeConverter);
+                        }
+
+                        writer.Formatting = DirectConfig.Debug ? Formatting.Indented : Formatting.None;
+                        serializer.Serialize(writer, this.Data);
+                    }
+                }
+            }
         }
     }
 }
