@@ -114,6 +114,7 @@
     <EmbeddedResource Include="Resources\DirectResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>DirectResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

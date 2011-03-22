@@ -1,6 +1,6 @@
 ﻿/* ****************************************************************************
  * 
- * Copyright (c) 2010 Eugene Lishnevsky. All rights reserved.
+ * Copyright (c) 2011 Eugene Lishnevsky. All rights reserved.
  * 
  * This file is part of Ext.Direct.Mvc.
  *
@@ -175,6 +175,10 @@ namespace Ext.Direct.Mvc {
         }
 
         private void ExecuteRequest(RequestContext requestContext, DirectRequest request) {
+            if (request == null) {
+                throw new ArgumentNullException("request", DirectResources.Common_DirectRequestIsNull);
+            }
+
             HttpContextBase httpContext = requestContext.HttpContext;
             RouteData routeData = requestContext.RouteData;
 
@@ -195,7 +199,7 @@ namespace Ext.Direct.Mvc {
 
             if (!method.IsFormHandler) {
                 if (request.Data == null && method.Len > 0 || request.Data != null && request.Data.Length != method.Len) {
-                    throw new ArgumentException(DirectResources.DirectProvider_WrongNumberOfArguments);
+                    throw new ArgumentException(String.Format(DirectResources.DirectProvider_WrongNumberOfArguments, request.Method, request.Action));
                 }
             }
 
