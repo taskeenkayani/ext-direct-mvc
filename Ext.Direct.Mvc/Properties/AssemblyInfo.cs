@@ -1,6 +1,6 @@
 ﻿/* ****************************************************************************
  * 
- * Copyright (c) 2010 Eugene Lishnevsky. All rights reserved.
+ * Copyright (c) 2011 Eugene Lishnevsky. All rights reserved.
  * 
  * This file is part of Ext.Direct.Mvc.
  *
@@ -31,7 +31,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Ext.Direct.Mvc")]
-[assembly: AssemblyCopyright("Copyright © Eugene Lishnevsky 2010")]
+[assembly: AssemblyCopyright("Copyright © Eugene Lishnevsky 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

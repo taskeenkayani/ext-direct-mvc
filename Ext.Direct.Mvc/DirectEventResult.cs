@@ -1,6 +1,6 @@
 ﻿/* ****************************************************************************
  * 
- * Copyright (c) 2010 Eugene Lishnevsky. All rights reserved.
+ * Copyright (c) 2011 Eugene Lishnevsky. All rights reserved.
  * 
  * This file is part of Ext.Direct.Mvc.
  *
@@ -20,12 +20,7 @@
  * ***************************************************************************/
 
 namespace Ext.Direct.Mvc {
-    using System;
     using System.Web;
-    using System.Web.Mvc;
-    using Ext.Direct.Mvc.Resources;
-    using Newtonsoft.Json;
-    using Ext.Direct.Mvc.Configuration;
 
     public class DirectEventResult : DirectResult {
 
