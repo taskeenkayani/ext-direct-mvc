@@ -124,7 +124,7 @@ namespace Ext.Direct.Mvc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Number of arguments does not match the definition method {0} in action {1}..
+        ///   Looks up a localized string similar to Number of arguments does not match the definition of method {0} in action {1}..
         /// </summary>
         internal static string DirectProvider_WrongNumberOfArguments {
             get {

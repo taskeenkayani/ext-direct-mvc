@@ -139,6 +139,6 @@
     <value>Unable to find method {0} in action {1}.</value>
   </data>
   <data name="DirectProvider_WrongNumberOfArguments" xml:space="preserve">
-    <value>Number of arguments does not match the definition method {0} in action {1}.</value>
+    <value>Number of arguments does not match the definition of method {0} in action {1}.</value>
   </data>
 </root>
