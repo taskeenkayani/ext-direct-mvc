@@ -37,7 +37,7 @@ namespace Ext.Direct.Mvc {
             }
 
             if (!directRequest.IsFormPost && directRequest.Data != null) {
-#if MVC10
+#if MVC1
                 controllerContext.Controller.ValueProvider = new DirectValueProviderDictionary(directRequest.Data, parameterDescriptors);
 #else
                 controllerContext.Controller.ValueProvider = new DirectValueProvider(directRequest.Data, parameterDescriptors);
