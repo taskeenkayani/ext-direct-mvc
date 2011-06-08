@@ -1,0 +1,19 @@
+﻿.simple-body {
+    background-color: #fff;
+    border: solid 1px #99BBE8;
+    padding: 5px;
+}
+.simple-body .result {
+    padding: 5px;
+    border: 1px solid #dcdcdc;
+    background-color: #f7f7f7;
+    color: #aaa;
+    margin-bottom: 5px;
+}
+.simple-body .result:first-child {
+    color: #000;
+}
+.simple-body .result .label {
+    width: 60px;
+    float: left;
+}

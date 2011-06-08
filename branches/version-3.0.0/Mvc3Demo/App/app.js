@@ -1,9 +1,19 @@
-﻿Ext.ns('Demo');
+﻿Ext.Loader.setConfig({enabled: true});
+Ext.Loader.setPath('Demo', './app');
+Ext.require('Demo.*');
 
-Ext.onReady(function () {
-    Ext.BLANK_IMAGE_URL = 'http://extjs.cachefly.net/ext-3.3.1/resources/images/default/s.gif';
-    //Ext.Direct.addProvider(Ext.app.REMOTING_API);
-    Ext.QuickTips.init();
+Ext.application({
+    name: 'Demo',
 
-    Ext.Msg.alert('Mvc3Demo', 'Application initialized.');
+    launch: function() {
+        Ext.direct.Manager.addProvider(Ext.app.REMOTING_API);
+
+        Ext.create('Demo.SimplePanel', {
+            renderTo: 'main'
+        });
+
+        Ext.direct.Manager.on('exception', function(e) {
+            console.log(e);
+        });
+    }
 });
