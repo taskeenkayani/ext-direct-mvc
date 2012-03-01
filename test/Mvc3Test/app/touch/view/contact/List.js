@@ -1,6 +1,6 @@
 ﻿Ext.define('Test.view.contact.List', {
     extend: 'Ext.dataview.List',
-    xtype: 'contacts',
+    xtype: 'contact-list',
     
     config: {
         title: 'Contacts',

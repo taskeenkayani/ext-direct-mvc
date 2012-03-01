@@ -1,5 +1,6 @@
 ﻿Ext.define('Test.view.contact.View', {
     extend: 'Ext.Container',
+    xtype: 'contact-view',
     
     config: {
         title: 'Information',
@@ -9,7 +10,7 @@
                 xtype: 'component',
                 itemId: 'content',
                 tpl: [
-                    '<div>{First Name} {LastName}</div>',
+                    '<div>{FirstName} {LastName}</div>',
                     '<div>{Email}</div>'
                 ].join('')
             }
@@ -18,9 +19,9 @@
         record: null
     },
     
-    updateRecord: function (newRecord) {
-        if (newRecord) {
-            this.down('#content').setData(newRecord.data);
+    setRecord: function (record) {
+        if (record) {
+            this.down('#content').setData(record.data);
         }
     }
 });
