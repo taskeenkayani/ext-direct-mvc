@@ -11,6 +11,7 @@ Ext.application({
     models: ['Contact'],
     stores: ['Contacts'],
     views: ['Main'],
+    controllers: ['Main'],
 
     launch: function () {
         Ext.Viewport.add({

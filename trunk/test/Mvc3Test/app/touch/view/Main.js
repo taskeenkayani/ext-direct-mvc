@@ -10,18 +10,16 @@
     config: {
         autoDestroy: false,
         navigationBar: {
-            items: [
-                {
-                    xtype: 'button',
-                    id: 'addButton',
-                    text: 'Add',
-                    align: 'right'
-                }
-            ]
+            items: [{
+                xtype: 'button',
+                id: 'mainButton',
+                text: 'Add',
+                align: 'right'
+            }]
         },
         
         items: [
-            { xtype: 'contacts' }
+            { xtype: 'contact-list' }
         ]
     }
 });
