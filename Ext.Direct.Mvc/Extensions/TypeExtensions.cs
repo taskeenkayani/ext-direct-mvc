@@ -1,6 +1,6 @@
 ﻿/* ****************************************************************************
  * 
- * Copyright (c) 2011 Eugene Lishnevsky. All rights reserved.
+ * Copyright (c) 2010 Eugene Lishnevsky. All rights reserved.
  * 
  * This file is part of Ext.Direct.Mvc.
  *
@@ -21,8 +21,15 @@
 
 namespace Ext.Direct.Mvc {
     using System;
+    using System.Web.Mvc;
 
     internal static class TypeExtensions {
+
+        internal static bool IsDirectAction(this Type type) {
+            bool isController = type.IsSubclassOf(typeof(Controller));
+            bool ignored = type.HasAttribute<DirectIgnoreAttribute>();
+            return (isController && !type.IsAbstract && !ignored);
+        }
 
         internal static bool HasAttribute<T>(this Type type) where T : Attribute {
             T attribute = type.GetAttribute<T>();
@@ -32,7 +39,7 @@ namespace Ext.Direct.Mvc {
         internal static T GetAttribute<T>(this Type type) where T : Attribute {
             T attribute = null;
             var attributes = (T[])type.GetCustomAttributes(typeof(T), true);
-            if (attributes.Length > 0) {
+            if (attributes != null && attributes.Length > 0) {
                 attribute = attributes[0];
             }
             return attribute;

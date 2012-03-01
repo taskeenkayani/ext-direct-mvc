@@ -1,6 +1,6 @@
 ﻿/* ****************************************************************************
  * 
- * Copyright (c) 2011 Eugene Lishnevsky. All rights reserved.
+ * Copyright (c) 2010 Eugene Lishnevsky. All rights reserved.
  * 
  * This file is part of Ext.Direct.Mvc.
  *
@@ -27,11 +27,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Ext.Direct.Mvc")]
-[assembly: AssemblyDescription("Ext.Direct server-side stack for ASP.NET MVC 1.0")]
+[assembly: AssemblyDescription("Ext.Direct server-side stack for ASP.NET MVC")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Ext.Direct.Mvc")]
-[assembly: AssemblyCopyright("Copyright © Eugene Lishnevsky 2011")]
+[assembly: AssemblyCopyright("Copyright © Eugene Lishnevsky 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -53,5 +53,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2.2.0.*")]
-[assembly: AssemblyFileVersion("2.2.0")]
+[assembly: AssemblyVersion("2.0.0.0")]
+[assembly: AssemblyFileVersion("2.0.0.0")]

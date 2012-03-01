@@ -1,6 +1,6 @@
 ﻿/* ****************************************************************************
  * 
- * Copyright (c) 2011 Eugene Lishnevsky. All rights reserved.
+ * Copyright (c) 2010 Eugene Lishnevsky. All rights reserved.
  * 
  * This file is part of Ext.Direct.Mvc.
  *
@@ -35,7 +35,8 @@ namespace Ext.Direct.Mvc {
                 return;
             }
 
-            var exception = filterContext.Exception;
+            Exception exception = filterContext.Exception;
+
             var directRequest = filterContext.HttpContext.Items[DirectRequest.DirectRequestKey] as DirectRequest;
 
             if (directRequest != null) {

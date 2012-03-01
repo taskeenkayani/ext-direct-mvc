@@ -1,6 +1,6 @@
 ﻿/* ****************************************************************************
  * 
- * Copyright (c) 2011 Eugene Lishnevsky. All rights reserved.
+ * Copyright (c) 2010 Eugene Lishnevsky. All rights reserved.
  * 
  * This file is part of Ext.Direct.Mvc.
  *
@@ -26,15 +26,16 @@ namespace Ext.Direct.Mvc {
     using Newtonsoft.Json.Linq;
 
     internal class RequestDataConverter : JsonConverter {
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) {
+
+        public override object ReadJson(JsonReader reader, Type objectType, JsonSerializer serializer) {
             var data = new List<object>();
-            JToken dataArray = JToken.ReadFrom(reader);
+            var dataArray = JToken.ReadFrom(reader);
 
             if (!dataArray.HasValues) return null;
 
             foreach (JToken dataItem in dataArray) {
                 if (dataItem is JValue) {
-                    object value = (dataItem as JValue).Value;
+                    var value = (dataItem as JValue).Value;
                     data.Add(value == null ? value : value.ToString());
                 } else {
                     data.Add(dataItem);

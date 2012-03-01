@@ -1,6 +1,6 @@
 ﻿/* ****************************************************************************
  * 
- * Copyright (c) 2011 Eugene Lishnevsky. All rights reserved.
+ * Copyright (c) 2010 Eugene Lishnevsky. All rights reserved.
  * 
  * This file is part of Ext.Direct.Mvc.
  *
@@ -20,6 +20,7 @@
  * ***************************************************************************/
 
 namespace Ext.Direct.Mvc.Configuration {
+    using System;
     using System.Configuration;
 
     public class DirectSection : ConfigurationSection {
@@ -37,11 +38,6 @@ namespace Ext.Direct.Mvc.Configuration {
         [ConfigurationProperty("namespace", IsRequired = false)]
         public string Namespace {
             get { return (string)this["namespace"]; }
-        }
-
-        [ConfigurationProperty("descriptorGeneration", IsRequired = false, DefaultValue = DescriptorGeneration.OptOut)]
-        public DescriptorGeneration DescriptorGeneration {
-            get { return (DescriptorGeneration)this["descriptorGeneration"]; }
         }
 
         [ConfigurationProperty("buffer", IsRequired = false, DefaultValue = null)]

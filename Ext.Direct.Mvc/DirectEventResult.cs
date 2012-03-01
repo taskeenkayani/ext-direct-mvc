@@ -1,6 +1,6 @@
 ﻿/* ****************************************************************************
  * 
- * Copyright (c) 2011 Eugene Lishnevsky. All rights reserved.
+ * Copyright (c) 2010 Eugene Lishnevsky. All rights reserved.
  * 
  * This file is part of Ext.Direct.Mvc.
  *
@@ -20,23 +20,43 @@
  * ***************************************************************************/
 
 namespace Ext.Direct.Mvc {
+    using System;
     using System.Web;
+    using System.Web.Mvc;
+    using Ext.Direct.Mvc.Resources;
+    using Newtonsoft.Json;
 
-    public class DirectEventResult : DirectResult {
+    public class DirectEventResult : JsonResult {
 
         public string Name {
             get;
             set;
         }
 
-        public override void WriteResponse(DirectRequest directRequest, HttpResponseBase httpResponse) {
+        public JsonSerializerSettings Settings {
+            get;
+            set;
+        }
+
+        public override void ExecuteResult(ControllerContext context) {
+            if (context == null) {
+                throw new ArgumentNullException("context");
+            }
+
+            HttpResponseBase httpResponse = context.HttpContext.Response;
+
+            var directRequest = context.HttpContext.Items[DirectRequest.DirectRequestKey] as DirectRequest;
+            if (directRequest == null) {
+                throw new NullReferenceException(DirectResources.Common_DirectRequestIsNull);
+            }
+
             var eventResponse = new DirectEventResponse(directRequest) {
                 Name = this.Name,
                 Data = this.Data,
                 Settings = this.Settings
             };
 
-            eventResponse.Write(httpResponse, this.ContentType, this.ContentEncoding);
+            eventResponse.Write(httpResponse, ContentType, ContentEncoding);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿/* ****************************************************************************
  * 
- * Copyright (c) 2011 Eugene Lishnevsky. All rights reserved.
+ * Copyright (c) 2010 Eugene Lishnevsky. All rights reserved.
  * 
  * This file is part of Ext.Direct.Mvc.
  *
@@ -22,9 +22,9 @@
 namespace Ext.Direct.Mvc.Configuration {
     using System;
     using System.Configuration;
-    using Ext.Direct.Mvc.Resources;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
+    using Ext.Direct.Mvc.Resources;
 
     public class DirectConfig {
 
@@ -45,10 +45,6 @@ namespace Ext.Direct.Mvc.Configuration {
 
         public static string Namespace {
             get { return _directSection.Namespace; }
-        }
-
-        public static DescriptorGeneration DescriptorGeneration {
-            get { return _directSection.DescriptorGeneration; }
         }
 
         public static string Assembly {

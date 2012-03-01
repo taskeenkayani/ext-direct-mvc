@@ -61,7 +61,7 @@
     onEchoDate: function() {
         var date = new Date();
         Test.EchoDate(date, function(result, response) {
-            this.updateBody(Date.parseDate(result, 'c').format('F d, Y g:i:s A'));
+            this.updateBody(Date.parseDate(result, 'c').format('j-M-Y, g:i a'));
         }, this);
     },
     

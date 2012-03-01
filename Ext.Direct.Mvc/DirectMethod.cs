@@ -1,6 +1,6 @@
 ﻿/* ****************************************************************************
  * 
- * Copyright (c) 2011 Eugene Lishnevsky. All rights reserved.
+ * Copyright (c) 2010 Eugene Lishnevsky. All rights reserved.
  * 
  * This file is part of Ext.Direct.Mvc.
  *
@@ -20,17 +20,16 @@
  * ***************************************************************************/
 
 namespace Ext.Direct.Mvc {
+    using System;
     using System.Reflection;
-    using System.Web.Mvc;
     using Newtonsoft.Json;
 
     internal class DirectMethod {
 
         internal DirectMethod(MethodBase method) {
-            var attr = method.GetAttribute<ActionNameAttribute>();
-            this.Name = attr != null ? attr.Name : method.Name;
+            this.Name = method.GetName();
             this.Len = method.GetParameters().Length;
-            this.IsFormHandler = method.HasAttribute<FormHandlerAttribute>();
+            this.IsFormHandler = method.IsFormHandler();
         }
 
         internal string Name {

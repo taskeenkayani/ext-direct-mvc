@@ -1,6 +1,6 @@
 ﻿/* ****************************************************************************
  * 
- * Copyright (c) 2011 Eugene Lishnevsky. All rights reserved.
+ * Copyright (c) 2010 Eugene Lishnevsky. All rights reserved.
  * 
  * This file is part of Ext.Direct.Mvc.
  *
@@ -78,13 +78,13 @@ namespace Ext.Direct.Mvc {
         public void Configure() {
             if (!this.Configured) {
                 string[] assemblyNames = DirectConfig.Assembly.Split(',');
-                foreach (string t in assemblyNames) {
-                    string assemblyName = t.Trim();
+                for (int i = 0; i < assemblyNames.Length; i++) {
+                    string assemblyName = assemblyNames[i].Trim();
                     Assembly assembly = Assembly.Load(assemblyName);
-                    Type[] types = assembly.GetTypes();
-                    foreach (Type type in types) {
-                        var action = DirectAction.Create(type);
-                        if (action != null) {
+                    var types = assembly.GetTypes();
+                    foreach (var type in types) {
+                        if (type.IsDirectAction()) {
+                            var action = new DirectAction(type);
                             if (_actions.ContainsKey(action.Name)) {
                                 throw new Exception(String.Format(DirectResources.DirectProvider_ActionExists, action.Name));
                             }
@@ -122,7 +122,7 @@ namespace Ext.Direct.Mvc {
                 }
                 jsonWriter.WritePropertyName("actions");
                 jsonWriter.WriteStartObject();
-                foreach (DirectAction action in _actions.Values) {
+                foreach (var action in _actions.Values) {
                     action.WriteJson(jsonWriter);
                 }
                 jsonWriter.WriteEndObject();
@@ -149,13 +149,13 @@ namespace Ext.Direct.Mvc {
                 // Raw HTTP Post request(s)
 
                 var reader = new StreamReader(httpContext.Request.InputStream, new UTF8Encoding());
-                string json = reader.ReadToEnd();
+                var json = reader.ReadToEnd();
 
                 if (json.StartsWith("[") && json.EndsWith("]")) {
                     // Batch of requests
                     var requests = JsonConvert.DeserializeObject<List<DirectRequest>>(json);
                     httpContext.Response.Write("[");
-                    foreach (DirectRequest request in requests) {
+                    foreach (var request in requests) {
                         ExecuteRequest(requestContext, request);
                         if (request != requests[requests.Count - 1]) {
                             httpContext.Response.Write(",");
@@ -169,16 +169,13 @@ namespace Ext.Direct.Mvc {
                 }
             } else {
                 // Form Post request
+
                 var request = new DirectRequest(httpContext.Request);
                 ExecuteRequest(requestContext, request);
             }
         }
 
         private void ExecuteRequest(RequestContext requestContext, DirectRequest request) {
-            if (request == null) {
-                throw new ArgumentNullException("request", DirectResources.Common_DirectRequestIsNull);
-            }
-
             HttpContextBase httpContext = requestContext.HttpContext;
             RouteData routeData = requestContext.RouteData;
 
@@ -199,7 +196,7 @@ namespace Ext.Direct.Mvc {
 
             if (!method.IsFormHandler) {
                 if (request.Data == null && method.Len > 0 || request.Data != null && request.Data.Length != method.Len) {
-                    throw new ArgumentException(String.Format(DirectResources.DirectProvider_WrongNumberOfArguments, request.Method, request.Action));
+                    throw new ArgumentException(DirectResources.DirectProvider_WrongNumberOfArguments);
                 }
             }
 

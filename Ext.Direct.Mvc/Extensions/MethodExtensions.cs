@@ -1,6 +1,6 @@
 ﻿/* ****************************************************************************
  * 
- * Copyright (c) 2011 Eugene Lishnevsky. All rights reserved.
+ * Copyright (c) 2010 Eugene Lishnevsky. All rights reserved.
  * 
  * This file is part of Ext.Direct.Mvc.
  *
@@ -21,9 +21,26 @@
 
 namespace Ext.Direct.Mvc {
     using System;
+    using System.Web.Mvc;
     using System.Reflection;
 
     internal static class MethodExtensions {
+
+        internal static string GetName(this MethodBase method) {
+            var attr = method.GetAttribute<ActionNameAttribute>();
+            return attr != null ? attr.Name : method.Name;
+        }
+
+        internal static bool IsDirectMethod(this MethodInfo method) {
+            // Any controller action is a Direct method unless marked with DirectIgnoreAttribute
+            bool returnsActionResult = (method.ReturnType == typeof(ActionResult) || method.ReturnType.IsSubclassOf(typeof(ActionResult)));
+            bool ignore = method.HasAttribute<DirectIgnoreAttribute>();
+            return (returnsActionResult && !ignore);
+        }
+
+        internal static bool IsFormHandler(this MethodBase method) {
+            return method.HasAttribute<FormHandlerAttribute>();
+        }
 
         internal static bool HasAttribute<T>(this MethodBase method) where T : Attribute {
             T attribute = method.GetAttribute<T>();
@@ -33,7 +50,7 @@ namespace Ext.Direct.Mvc {
         internal static T GetAttribute<T>(this MethodBase method) where T : Attribute {
             T attribute = null;
             var attributes = (T[])method.GetCustomAttributes(typeof(T), true);
-            if (attributes.Length > 0) {
+            if (attributes != null && attributes.Length > 0) {
                 attribute = attributes[0];
             }
             return attribute;
