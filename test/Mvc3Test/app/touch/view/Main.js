@@ -4,7 +4,8 @@
     
     requires: [
         'Test.view.contact.List',
-        'Test.view.contact.View'
+        'Test.view.contact.View',
+        'Test.view.contact.Form'
     ],
     
     config: {
