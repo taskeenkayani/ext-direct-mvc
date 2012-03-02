@@ -5,10 +5,18 @@
         refs: {
             main: 'mainview',
             mainButton: '#mainButton',
+            addButton: '#mainButton[text=Add]',
+            editButton: '#mainButton[text=Edit]',
+            saveButton: '#mainButton[text=Save]',
             contactList: 'contact-list',
             contactView: {
                 selector: 'contact-view',
                 xtype: 'contact-view',
+                autoCreate: true
+            },
+            contactForm: {
+                selector: 'contact-form',
+                xtype: 'contact-form',
                 autoCreate: true
             }
         },
@@ -19,6 +27,15 @@
             },
             contactList: {
                 itemtap: 'onContactSelect'
+            },
+            addButton: {
+                tap: 'onAddContact'
+            },
+            editButton: {
+                tap: 'onEditContact'
+            },
+            saveButton: {
+                tap: 'onSaveContact'
             }
         }
     },
@@ -37,7 +54,7 @@
                 mainButton.setText('Edit');
                 mainButton.setUi('normal');
                 break;
-            case 'contact-edit':
+            case 'contact-form':
                 mainButton.setText('Save');
                 mainButton.setUi('confirm');
                 break;
@@ -48,5 +65,21 @@
         var view = this.getContactView(); // contact view will be created if wasn't already
         view.setRecord(record);
         this.getMain().push(view);
+    },
+    
+    onAddContact: function () {
+        console.log('onAddContact');
+    },
+    
+    onEditContact: function () {
+        var record = this.getContactView().getRecord();
+        var form = this.getContactForm();
+        form.setRecord(record);
+        this.getMain().push(form);
+    },
+
+    onSaveContact: function () {
+        var record = this.getContactForm().getRecord();
+        console.log(record);
     }
 });

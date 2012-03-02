@@ -1,27 +1,15 @@
 ﻿Ext.define('Test.view.contact.View', {
-    extend: 'Ext.Container',
+    extend: 'Ext.Component',
     xtype: 'contact-view',
     
     config: {
         title: 'Information',
-        
-        items: [
-            {
-                xtype: 'component',
-                itemId: 'content',
-                tpl: [
-                    '<div>{FirstName} {LastName}</div>',
-                    '<div>{Email}</div>'
-                ].join('')
-            }
-        ],
-        
-        record: null
-    },
-    
-    setRecord: function (record) {
-        if (record) {
-            this.down('#content').setData(record.data);
-        }
+        cls: 'contact-info',
+        styleHtmlContent: true,
+        tpl: [
+            '<h3>{FirstName} {LastName}</h3>',
+            '<div><span class="label">Email: </span><a href="mailto:{Email}">{Email}</a></div>',
+            '<div><span class="label">Birth Date: </span>{BirthDate:date("F j, Y")}</div>'
+        ].join('')
     }
 });
