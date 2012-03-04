@@ -17,7 +17,8 @@
             right: 15,
             width: 30,
             height: 30,
-            style: 'background-color:red;'
+            style: 'background-color:red;',
+            html: 'star'
         }]
     }
 });
