@@ -84,9 +84,10 @@
     <Content Include="app\touch\view\contact\View.js" />
     <Content Include="app\touch\view\Main.js" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\sencha-touch-2\sencha-touch-all-debug.js" />
-    <Content Include="Scripts\sencha-touch-2\sencha-touch-all.js" />
-    <Content Include="Scripts\sencha-touch-2\sencha-touch.css" />
+    <Content Include="resources\images\star.png" />
+    <Content Include="scripts\sencha-touch-2\sencha-touch-all-debug.js" />
+    <Content Include="scripts\sencha-touch-2\sencha-touch-all.js" />
+    <Content Include="scripts\sencha-touch-2\sencha-touch.css" />
     <Content Include="Web.config" />
     <Content Include="Views\Web.config" />
   </ItemGroup>
