@@ -2,6 +2,8 @@
     extend: 'Ext.Container',
     xtype: 'contact-view',
     
+    requires: 'Test.ux.Star',
+    
     config: {
         title: 'Information',
         cls: 'contact-info',
@@ -12,13 +14,9 @@
             '<div><span class="label">Birth Date: </span>{BirthDate:date("F j, Y")}</div>'
         ].join(''),
         items: [{
-            xtype: 'component',
+            xtype: 'star',
             top: 15,
-            right: 15,
-            width: 30,
-            height: 30,
-            style: 'background-color:red;',
-            html: 'star'
+            right: 15
         }]
     }
 });
