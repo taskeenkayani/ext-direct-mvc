@@ -80,6 +80,8 @@
     <Content Include="app\touch\controller\Main.js" />
     <Content Include="app\touch\model\Contact.js" />
     <Content Include="app\touch\store\Contacts.js" />
+    <Content Include="app\touch\view\Basic.js" />
+    <Content Include="app\touch\view\Form.js" />
     <Content Include="app\touch\view\List.js" />
     <Content Include="app\touch\view\Main.js" />
     <Content Include="app\touch\view\Menu.js" />
