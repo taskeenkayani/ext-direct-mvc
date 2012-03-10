@@ -435,7 +435,9 @@
     <Content Include="scripts\sencha-touch-2\sencha-touch-all-debug.js" />
     <Content Include="scripts\sencha-touch-2\sencha-touch-all.js" />
     <Content Include="scripts\sencha-touch-2\sencha-touch.css" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
