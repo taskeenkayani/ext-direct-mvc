@@ -4,7 +4,7 @@
     
     config: {
         items: [
-            { xtype: 'contact-list' }
+            { xtype: 'demomenu' }
         ]
     }
 });
