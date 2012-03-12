@@ -46,6 +46,11 @@ namespace Ext.Direct.Mvc {
             private set;
         }
 
+        public bool UsesNamedArguments {
+            get;
+            private set;
+        }
+
         public DirectMethod(MethodBase method) {
             var actionNameAttr = method.GetAttribute<ActionNameAttribute>();
             this.Name = actionNameAttr != null ? actionNameAttr.Name : method.Name;
@@ -62,6 +67,7 @@ namespace Ext.Direct.Mvc {
             }
 
             this.IsFormHandler = method.HasAttribute<FormHandlerAttribute>();
+            this.UsesNamedArguments = method.HasAttribute<NamedArgumentsAttribute>();
         }
 
         public void WriteJson(JsonWriter writer) {

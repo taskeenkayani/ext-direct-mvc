@@ -85,6 +85,7 @@
     <Content Include="app\touch\view\List.js" />
     <Content Include="app\touch\view\Main.js" />
     <Content Include="app\touch\view\Menu.js" />
+    <Content Include="App_Data\Contacts.sdf" />
     <Content Include="Global.asax" />
     <Content Include="scripts\sencha-touch-2\resources\themes\images\default\check.png" />
     <Content Include="scripts\sencha-touch-2\resources\themes\images\default\clear_icon.png" />
@@ -442,9 +443,7 @@
     </Content>
     <Content Include="Views\Web.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\src\Ext.Direct.Mvc\Ext.Direct.Mvc3.csproj">
       <Project>{BAE22E76-F2A1-4DDE-9F96-23D7005149D6}</Project>

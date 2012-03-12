@@ -31,11 +31,15 @@ namespace Ext.Direct.Mvc {
 
         private readonly Dictionary<string, ValueProviderResult> _values = new Dictionary<string, ValueProviderResult>(StringComparer.OrdinalIgnoreCase);
 
-        public DirectValueProvider(Object[] data, ParameterDescriptor[] parameterDescriptors) {
+        public DirectValueProvider(DirectRequest directRequest, ParameterDescriptor[] parameterDescriptors) {
             int paramCount = parameterDescriptors.Length;
+            Object[] data = directRequest.Data;
+
+            DirectMethod directMethod = DirectProvider.GetCurrent().GetMethod(directRequest.Action, directRequest.Method);
+            bool usesNamedArguments = (directMethod != null && directMethod.UsesNamedArguments);
 
             if (paramCount > 0) {
-                if (data.Length == 1 && paramCount > 1) { // named arguments. match params by name
+                if (usesNamedArguments) { // named arguments. match params by name
                     var dataObj = data[0] as JObject;
 
                     for (int i = 0; i < paramCount; i++) {

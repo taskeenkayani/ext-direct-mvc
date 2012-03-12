@@ -19,11 +19,10 @@ namespace Mvc3Demo.Controllers {
         }
 
         public DirectResult Get(int id) {
-            Contact contact = db.Contacts.Find(id);
+            Contact contact = db.Contacts.Single(c => c.ID == id);
             return Direct(contact);
         }
 
-        [HttpPost]
         public DirectResult Create(Contact contact) {
             if (ModelState.IsValid) {
                 db.Contacts.Add(contact);
@@ -36,6 +35,12 @@ namespace Mvc3Demo.Controllers {
             return Direct(new {
                 success = false
             });
+        }
+
+        public DirectResult Update(Contact contact) {
+            db.Entry(contact).State = EntityState.Modified;
+            db.SaveChanges();
+            return Direct(db.Contacts.Find(contact.ID));
         }
 
         public DirectResult Delete(int id) {
