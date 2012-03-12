@@ -81,8 +81,17 @@ namespace Ext.Direct.Mvc {
             }
         }
 
-        public DirectAction GetAction(string name) {
-            return !_actions.ContainsKey(name) ? null : _actions[name];
+        public DirectAction GetAction(string actionName) {
+            return !_actions.ContainsKey(actionName) ? null : _actions[actionName];
+        }
+
+        public DirectMethod GetMethod(string actionName, string methodName) {
+            DirectMethod method = null;
+            DirectAction action = this.GetAction(actionName);
+            if (action != null) {
+                method = action.GetMethod(methodName);
+            }
+            return method;
         }
 
         #region ToString

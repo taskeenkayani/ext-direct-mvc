@@ -3,6 +3,18 @@
 
     config: {
         title: 'Basic',
-        html: 'Basic...'
+        layout: {
+            type: 'vbox',
+            pack: 'center'
+        },
+        defaults: {
+            xtype: 'button',
+            margin: 10
+        },
+        items: [
+            {text: 'Echo Text'},
+            {text: 'Echo Text'},
+            {text: 'Echo Text'}
+        ]
     }
 });

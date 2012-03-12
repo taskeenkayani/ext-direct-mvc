@@ -1,5 +1,6 @@
 ﻿Ext.define('Demo.view.Form', {
     extend: 'Ext.form.Panel',
+    xtype: 'demoform',
 
     config: {
         title: 'Form',
@@ -7,6 +8,7 @@
             {
                 xtype: 'fieldset',
                 title: 'Contact Information',
+                instructions: 'Tap Load to load a contact, then make some changes and tap Save.',
                 defaults: {
                     labelWidth: '6em'
                 },
@@ -29,7 +31,11 @@
                     {
                         xtype: 'datepickerfield',
                         label: 'Birth Date',
-                        name: 'BirthDate'
+                        name: 'BirthDate',
+                        picker: {
+                            yearFrom: 1900,
+                            yearTo: new Date().getFullYear()
+                        }
                     },
                     {
                         xtype: 'checkboxfield',
@@ -39,23 +45,27 @@
                 ]
             },
             {
-                xtype: 'toolbar',
-                docked: 'bottom',
-                ui: 'light',
+                xtype: 'container',
+                layout: 'hbox',
                 items: [
                     {
                         xtype: 'button',
                         text: 'Load',
-                        align: 'left'
+                        action: 'load',
+                        align: 'left',
+                        flex: 1
                     },
                     {
-                        xtype: 'spacer'
+                        xtype: 'spacer',
+                        width: '1em'
                     },
                     {
                         xtype: 'button',
                         text: 'Save',
+                        action: 'save',
                         ui: 'confirm',
-                        align: 'right'  
+                        align: 'right',
+                        flex: 1
                     }
                 ]
             }
