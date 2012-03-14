@@ -30,7 +30,7 @@ namespace Ext.Direct.Mvc {
     using System.Web.Compilation;
     using System.Web.Mvc;
     using System.Web.Routing;
-    using Ext.Direct.Mvc.Resources;
+    using Resources;
     using Newtonsoft.Json;
 
     public class DirectProvider {
@@ -48,7 +48,7 @@ namespace Ext.Direct.Mvc {
                 if (!path.EndsWith("/")) {
                     path += "/";
                 }
-                return path + "ExtDirect/Router";
+                return path + "DirectRouter/Index";
             }
         }
 
@@ -87,7 +87,7 @@ namespace Ext.Direct.Mvc {
 
         public DirectMethod GetMethod(string actionName, string methodName) {
             DirectMethod method = null;
-            DirectAction action = this.GetAction(actionName);
+            DirectAction action = GetAction(actionName);
             if (action != null) {
                 method = action.GetMethod(methodName);
             }
@@ -97,7 +97,7 @@ namespace Ext.Direct.Mvc {
         #region ToString
 
         public override string ToString() {
-            return this.ToString(false);
+            return ToString(false);
         }
 
         public string ToString(bool json) {
@@ -113,9 +113,9 @@ namespace Ext.Direct.Mvc {
 #endif
                 writer.WriteStartObject();
                 writer.WriteProperty("type", "remoting");
-                writer.WriteProperty("url", this.Url);
+                writer.WriteProperty("url", Url);
                 if (json) {
-                    writer.WriteProperty("descriptor", this.Name ?? config.Name);
+                    writer.WriteProperty("descriptor", Name ?? config.Name);
                 }
                 if (!String.IsNullOrEmpty(config.Namespace)) {
                     writer.WriteProperty("namespace", config.Namespace);
@@ -138,7 +138,7 @@ namespace Ext.Direct.Mvc {
                 writer.WriteEndObject();
             }
 
-            return json ? sb.ToString() : String.Format("{0}={1};", this.Name ?? config.Name, sb);
+            return json ? sb.ToString() : String.Format("{0}={1};", Name ?? config.Name, sb);
         }
 
         #endregion
@@ -191,7 +191,7 @@ namespace Ext.Direct.Mvc {
             httpContext.Items[DirectRequest.DirectRequestKey] = request;
             var controller = (Controller)_factory.CreateController(requestContext, request.Action);
 
-            DirectAction action = this.GetAction(request.Action);
+            DirectAction action = GetAction(request.Action);
             if (action == null) {
                 throw new NullReferenceException(String.Format(DirectResources.DirectProvider_ActionNotFound, request.Action));
             }

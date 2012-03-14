@@ -23,85 +23,38 @@ namespace Ext.Direct.Mvc {
     using System;
     using System.Text;
     using System.Web.Mvc;
-    using Ext.Direct.Mvc.Resources;
     using Newtonsoft.Json;
 
     public class DirectController : Controller {
 
-        protected internal DirectResult Direct(object data) {
-            return Direct(data, (string)null);
+        protected override JsonResult Json(object data, string contentType, Encoding contentEncoding) {
+            return Json(data, contentType, contentEncoding, JsonRequestBehavior.DenyGet, null);
         }
 
-        protected internal DirectResult Direct(object data, string contentType) {
-            return Direct(data, contentType, (Encoding)null);
+        protected override JsonResult Json(object data, string contentType, Encoding contentEncoding, JsonRequestBehavior behavior) {
+            return Json(data, contentType, contentEncoding, behavior, null);
         }
 
-        protected internal DirectResult Direct(object data, string contentType, Encoding contentEncoding) {
-            return Direct(data, contentType, contentEncoding, (JsonSerializerSettings)null);
+        protected internal DirectResult Json(object data, params JsonConverter[] converters) {
+            return Json(data, null, converters);
         }
 
-        protected internal DirectResult Direct(object data, params JsonConverter[] converters) {
-            return Direct(data, null, converters);
+        protected internal DirectResult Json(object data, string contentType, params JsonConverter[] converters) {
+            return Json(data, contentType, null, converters);
         }
-
-        protected internal DirectResult Direct(object data, string contentType, params JsonConverter[] converters) {
-            return Direct(data, contentType, null, converters);
-        }
-
-        protected internal DirectResult Direct(object data, string contentType, Encoding contentEncoding, params JsonConverter[] converters) {
+        
+        protected internal DirectResult Json(object data, string contentType, Encoding contentEncoding, params JsonConverter[] converters) {
             JsonSerializerSettings settings = (converters != null && converters.Length > 0) ? new JsonSerializerSettings { Converters = converters } : null;
-            return Direct(data, contentType, contentEncoding, settings);
+            return Json(data, contentType, contentEncoding, JsonRequestBehavior.DenyGet, settings);
         }
 
-        protected internal virtual DirectResult Direct(object data, string contentType, Encoding contentEncoding, JsonSerializerSettings settings) {
+        protected internal virtual DirectResult Json(object data, string contentType, Encoding contentEncoding, JsonRequestBehavior behavior, JsonSerializerSettings settings) {
             return new DirectResult {
                 Data = data,
                 ContentType = contentType,
                 ContentEncoding = contentEncoding,
-                Settings = settings
-            };
-        }
-
-        protected internal DirectEventResult DirectEvent(string name) {
-            return DirectEvent(name, null);
-        }
-
-        protected internal DirectEventResult DirectEvent(string name, object data) {
-            return DirectEvent(name, data, (string)null);
-        }
-
-        protected internal DirectEventResult DirectEvent(string name, object data, string contentType) {
-            return DirectEvent(name, data, contentType, (Encoding)null);
-        }
-
-        protected internal DirectEventResult DirectEvent(string name, object data, string contentType, Encoding contentEncoding) {
-            return DirectEvent(name, data, contentType, contentEncoding, (JsonSerializerSettings)null);
-        }
-
-        protected internal DirectEventResult DirectEvent(string name, object data, params JsonConverter[] converters) {
-            return DirectEvent(name, data, null, converters);
-        }
-
-        protected internal DirectEventResult DirectEvent(string name, object data, string contentType, params JsonConverter[] converters) {
-            return DirectEvent(name, data, contentType, null, converters);
-        }
-
-        protected internal DirectEventResult DirectEvent(string name, object data, string contentType, Encoding contentEncoding, params JsonConverter[] converters) {
-            JsonSerializerSettings settings = (converters != null && converters.Length > 0) ? new JsonSerializerSettings { Converters = converters } : null;
-            return DirectEvent(name, data, contentType, contentEncoding, settings);
-        }
-
-        protected internal virtual DirectEventResult DirectEvent(string name, object data, string contentType, Encoding contentEncoding, JsonSerializerSettings settings) {
-            if (String.IsNullOrEmpty(name)) {
-                throw new ArgumentException(DirectResources.Common_NullOrEmpty, "name");
-            }
-
-            return new DirectEventResult {
-                Name = name,
-                Data = data,
-                ContentType = contentType,
-                ContentEncoding = contentEncoding,
-                Settings = settings
+                Settings = settings,
+                JsonRequestBehavior = behavior
             };
         }
     }

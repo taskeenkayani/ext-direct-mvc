@@ -75,21 +75,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\DirectEventAttribute.cs" />
     <Compile Include="Attributes\DirectHandleErrorAttribute.cs" />
     <Compile Include="Attributes\DirectIgnoreAttribute.cs" />
     <Compile Include="Attributes\NamedArgumentsAttributes.cs" />
+    <Compile Include="DirectRouterController.cs" />
     <Compile Include="DirectAction.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DirectController.cs" />
-    <Compile Include="ExtDirectController.cs" />
+    <Compile Include="DirectApiController.cs" />
     <Compile Include="DirectErrorResponse.cs" />
     <Compile Include="DirectEventResponse.cs" />
-    <Compile Include="DirectEventResult.cs" />
     <Compile Include="DirectException.cs" />
-    <Compile Include="DirectResponseBase.cs" />
+    <Compile Include="DirectResponse.cs" />
     <Compile Include="DirectValueProvider.cs" />
-    <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\MethodExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="DirectMethod.cs" />
@@ -97,7 +97,7 @@
     <Compile Include="DirectMethodInvoker.cs" />
     <Compile Include="DirectProvider.cs" />
     <Compile Include="DirectRequest.cs" />
-    <Compile Include="DirectResponse.cs" />
+    <Compile Include="DirectDataResponse.cs" />
     <Compile Include="DirectResult.cs" />
     <Compile Include="Extensions\JsonExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

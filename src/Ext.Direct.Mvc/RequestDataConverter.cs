@@ -37,8 +37,8 @@ namespace Ext.Direct.Mvc {
             } else {
                 foreach (JToken dataItem in dataArray) {
                     if (dataItem is JValue) {
-                        object value = (dataItem as JValue).Value;
-                        data.Add(value == null ? value : value.ToString());
+                        var value = (dataItem as JValue).Value;
+                        data.Add(value == null ? null : value.ToString());
                     } else {
                         data.Add(dataItem);
                     }

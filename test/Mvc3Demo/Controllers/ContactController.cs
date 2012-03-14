@@ -14,25 +14,26 @@ namespace Mvc3Demo.Controllers {
 
         private readonly TestDbContext db = new TestDbContext();
 
-        public DirectResult List() {
-            return Direct(db.Contacts.ToList());
+        public ActionResult List() {
+            System.Threading.Thread.Sleep(2000);
+            return Json(db.Contacts.ToList());
         }
 
         public DirectResult Get(int id) {
             Contact contact = db.Contacts.Single(c => c.ID == id);
-            return Direct(contact);
+            return Json(contact);
         }
 
         public DirectResult Create(Contact contact) {
             if (ModelState.IsValid) {
                 db.Contacts.Add(contact);
                 db.SaveChanges();
-                return Direct(new {
+                return Json(new {
                     success = true
                 });
             }
 
-            return Direct(new {
+            return Json(new {
                 success = false
             });
         }
@@ -40,14 +41,14 @@ namespace Mvc3Demo.Controllers {
         public DirectResult Update(Contact contact) {
             db.Entry(contact).State = EntityState.Modified;
             db.SaveChanges();
-            return Direct(db.Contacts.Find(contact.ID));
+            return Json(db.Contacts.Find(contact.ID));
         }
 
         public DirectResult Delete(int id) {
             Contact contact = db.Contacts.Find(id);
             db.Contacts.Remove(contact);
             db.SaveChanges();
-            return Direct(true);
+            return Json(true);
         }
 
         protected override void Dispose(bool disposing) {

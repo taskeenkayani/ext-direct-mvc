@@ -22,23 +22,39 @@
 namespace Ext.Direct.Mvc {
     using Newtonsoft.Json;
 
-    public class DirectEventResponse : DirectResponse {
+    public class DirectDataResponse : DirectResponse {
 
-        public DirectEventResponse(DirectRequest request) : base(request) { }
-
-        [JsonProperty("type")]
-        public string Type {
-            get { return "event"; }
+        public DirectDataResponse(DirectRequest request) : base(request) {
+            TransactionId = request.TransactionId;
+            Action = request.Action;
+            Method = request.Method;
         }
 
-        [JsonProperty("name")]
-        public string Name {
+        [JsonProperty("type")]
+        public virtual string Type {
+            get { return "rpc"; }
+        }
+
+        [JsonProperty("tid")]
+        public int TransactionId {
             get;
             set;
         }
 
-        [JsonProperty("data")]
-        public object Data {
+        [JsonProperty("action")]
+        public string Action {
+            get;
+            set;
+        }
+
+        [JsonProperty("method")]
+        public string Method {
+            get;
+            set;
+        }
+
+        [JsonProperty("result", NullValueHandling = NullValueHandling.Ignore)]
+        public object Result {
             get;
             set;
         }

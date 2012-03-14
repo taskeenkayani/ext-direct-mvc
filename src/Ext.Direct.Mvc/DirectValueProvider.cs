@@ -45,7 +45,7 @@ namespace Ext.Direct.Mvc {
                     for (int i = 0; i < paramCount; i++) {
                         string pName = parameterDescriptors[i].ParameterName;
                         Type pType = parameterDescriptors[i].ParameterType;
-                        JToken value = dataObj.SelectToken(pName);
+                        JToken value = dataObj != null ? dataObj.SelectToken(pName) : null;
                         object rawValue = null;
 
                         if (value != null && value.Type != JTokenType.Null && value.Type != JTokenType.Undefined) {

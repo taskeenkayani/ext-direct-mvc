@@ -51,36 +51,44 @@ namespace Ext.Direct.Mvc {
             private set;
         }
 
+        public string EventName {
+            get;
+            private set;
+        }
+
         public DirectMethod(MethodBase method) {
             var actionNameAttr = method.GetAttribute<ActionNameAttribute>();
-            this.Name = actionNameAttr != null ? actionNameAttr.Name : method.Name;
+            Name = actionNameAttr != null ? actionNameAttr.Name : method.Name;
+
+            var directEventAttr = method.GetAttribute<DirectEventAttribute>();
+            EventName = directEventAttr != null ? directEventAttr.Name : null;
 
             var useNamedArgsAttr = method.GetAttribute<NamedArgumentsAttribute>();
             if (useNamedArgsAttr == null) {
-                this.Len = method.GetParameters().Length;
+                Len = method.GetParameters().Length;
             } else {
                 var parameterInfos = method.GetParameters();
-                this.Params = new string[parameterInfos.Length];
+                Params = new string[parameterInfos.Length];
                 for (int i = 0; i < parameterInfos.Length; i++) {
-                    this.Params[i] = parameterInfos[i].Name;
+                    Params[i] = parameterInfos[i].Name;
                 }
             }
 
-            this.IsFormHandler = method.HasAttribute<FormHandlerAttribute>();
-            this.UsesNamedArguments = method.HasAttribute<NamedArgumentsAttribute>();
+            IsFormHandler = method.HasAttribute<FormHandlerAttribute>();
+            UsesNamedArguments = method.HasAttribute<NamedArgumentsAttribute>();
         }
 
         public void WriteJson(JsonWriter writer) {
             writer.WriteStartObject();
-            writer.WriteProperty("name", this.Name);
+            writer.WriteProperty("name", Name);
 
-            if (this.Params != null) {
-                writer.WriteProperty("params", this.Params);
+            if (Params != null) {
+                writer.WriteProperty("params", Params);
             } else {
-                writer.WriteProperty("len", this.Len);
+                writer.WriteProperty("len", Len);
             }
 
-            if (this.IsFormHandler) {
+            if (IsFormHandler) {
                 writer.WriteProperty("formHandler", true);
             }
 

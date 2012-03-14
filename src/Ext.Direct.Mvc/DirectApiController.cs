@@ -23,25 +23,16 @@ namespace Ext.Direct.Mvc {
     using System;
     using System.Web.Mvc;
 
-    public class ExtDirectController : Controller {
+    public class DirectApiController : Controller {
 
         private readonly DirectProvider _provider = DirectProvider.GetCurrent();
 
         [AcceptVerbs("GET")]
-        public ActionResult Api() {
+        public ActionResult Index() {
             // for integration with the Ext Designer
-            bool json = (this.HttpContext.Request.QueryString["format"] == "json");
-            _provider.Name = this.HttpContext.Request.QueryString["name"];
+            bool json = (HttpContext.Request.QueryString["format"] == "json");
+            _provider.Name = HttpContext.Request.QueryString["name"];
             return JavaScript(_provider.ToString(json));
-        }
-
-        [AcceptVerbs("POST")]
-        [ValidateInput(false)]
-        public ActionResult Router() {
-            // Process Ext.Direct requests
-
-            _provider.Execute(this.ControllerContext.RequestContext);
-            return new EmptyResult();
         }
     }
 }
