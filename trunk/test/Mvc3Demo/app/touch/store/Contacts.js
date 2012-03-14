@@ -5,9 +5,17 @@
         model: 'Demo.model.Contact',
         proxy: {
             type: 'direct',
-            directFn: Contact.List
+            directFn: Contact.List,
+            paramOrder: 'start|limit',
+            reader: {
+                type: 'json',
+                rootProperty: 'data'
+            }
         },
+        pageSize: 20,
         sorters: ['FirstName', 'LastName'],
-        autoLoad: true
+        grouper: function (record) {
+            return record.get('FirstName')[0];
+        }
     }
 });
