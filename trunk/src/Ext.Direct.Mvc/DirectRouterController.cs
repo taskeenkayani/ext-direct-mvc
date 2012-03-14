@@ -20,27 +20,19 @@
  * ***************************************************************************/
 
 namespace Ext.Direct.Mvc {
-    using Newtonsoft.Json;
+    using System;
+    using System.Web.Mvc;
 
-    public class DirectEventResponse : DirectResponse {
+    public class DirectRouterController : Controller {
 
-        public DirectEventResponse(DirectRequest request) : base(request) { }
+        private readonly DirectProvider _provider = DirectProvider.GetCurrent();
 
-        [JsonProperty("type")]
-        public string Type {
-            get { return "event"; }
-        }
-
-        [JsonProperty("name")]
-        public string Name {
-            get;
-            set;
-        }
-
-        [JsonProperty("data")]
-        public object Data {
-            get;
-            set;
+        [AcceptVerbs("POST")]
+        [ValidateInput(false)]
+        public ActionResult Index() {
+            // Process Ext.Direct requests
+            _provider.Execute(ControllerContext.RequestContext);
+            return new EmptyResult();
         }
     }
 }

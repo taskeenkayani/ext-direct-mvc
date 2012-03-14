@@ -19,12 +19,11 @@
  *
  * ***************************************************************************/
 
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-
 namespace Ext.Direct.Mvc {
     using System;
     using System.Configuration;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
 
     public class ProviderConfiguration : ConfigurationSection {
 

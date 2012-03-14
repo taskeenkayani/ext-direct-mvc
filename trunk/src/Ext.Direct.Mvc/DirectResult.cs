@@ -24,7 +24,6 @@ namespace Ext.Direct.Mvc {
     using System.Web;
     using System.Web.Mvc;
     using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
 
     public class DirectResult : JsonResult {
 
@@ -42,35 +41,50 @@ namespace Ext.Direct.Mvc {
             var directRequest = context.HttpContext.Items[DirectRequest.DirectRequestKey] as DirectRequest;
 
             if (directRequest != null) {
-                this.WriteResponse(directRequest, httpResponse);
+                WriteResponse(directRequest, httpResponse);
             } else {
                 // Allow regular response when the action is not called through Ext Direct
-                this.WriteContent(httpResponse);
+                WriteContent(httpResponse);
             }
         }
 
-        public virtual void WriteResponse(DirectRequest directRequest, HttpResponseBase httpResponse) {
-            var directResponse = new DirectResponse(directRequest) {
-                Result = this.Data,
-                Settings = this.Settings
-            };
+        internal virtual void WriteResponse(DirectRequest directRequest, HttpResponseBase response) {
+            var method = DirectProvider.GetCurrent().GetMethod(directRequest.Action, directRequest.Method);
+            DirectResponse directResponse;
 
-            directResponse.Write(httpResponse, this.ContentType, this.ContentEncoding);
+            if (method.EventName != null) {
+                directResponse = new DirectEventResponse(directRequest) {
+                    Name = method.EventName,
+                    Data = Data,
+                    Settings = Settings
+                };
+            } else {
+                directResponse = new DirectDataResponse(directRequest) {
+                    Result = Data,
+                    Settings = Settings
+                };
+            }
+
+            directResponse.Write(response, ContentType, ContentEncoding);
         }
 
         private void WriteContent(HttpResponseBase response) {
-            if (!String.IsNullOrEmpty(this.ContentType)) {
-                response.ContentType = this.ContentType;
+            if (!String.IsNullOrEmpty(ContentType)) {
+                response.ContentType = ContentType;
+            } else {
+                response.ContentType = "application/json";
             }
-            if (this.ContentEncoding != null) {
-                response.ContentEncoding = this.ContentEncoding;
+
+            if (ContentEncoding != null) {
+                response.ContentEncoding = ContentEncoding;
             }
-            if (this.Data != null) {
-                if (this.Data is String) {
-                    response.Write(this.Data);
+
+            if (Data != null) {
+                if (Data is String) {
+                    response.Write(Data);
                 } else {
                     using (JsonWriter writer = new JsonTextWriter(response.Output)) {
-                        JsonSerializer serializer = JsonSerializer.Create(this.Settings);
+                        JsonSerializer serializer = JsonSerializer.Create(Settings);
                         var converter = ProviderConfiguration.GetDefaultDateTimeConverter();
                         if (converter != null) {
                             serializer.Converters.Add(converter);
@@ -80,7 +94,7 @@ namespace Ext.Direct.Mvc {
 #else
                         writer.Formatting = ProviderConfiguration.GetConfiguration().Debug ? Formatting.Indented : Formatting.None;
 #endif
-                        serializer.Serialize(writer, this.Data);
+                        serializer.Serialize(writer, Data);
                     }
                 }
             }

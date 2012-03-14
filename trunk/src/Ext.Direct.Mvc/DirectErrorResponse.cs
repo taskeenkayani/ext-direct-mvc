@@ -25,20 +25,20 @@ namespace Ext.Direct.Mvc {
     using Newtonsoft.Json;
 
     [JsonObject]
-    public class DirectErrorResponse : DirectResponse {
+    public class DirectErrorResponse : DirectDataResponse {
 
         public DirectErrorResponse(DirectRequest request, Exception exception) : base(request) {
-            this.ErrorMessage = exception.Message;
-            this.ErrorData = exception.Data.Count > 0 ? exception.Data : null;
+            ErrorMessage = exception.Message;
+            ErrorData = exception.Data.Count > 0 ? exception.Data : null;
 #if DEBUG
-            this.Where = GetErrorLocation(exception);
+            Where = GetErrorLocation(exception);
 #else
             if (ProviderConfiguration.GetConfiguration().Debug) {
-                this.Where = GetErrorLocation(exception);
+                Where = GetErrorLocation(exception);
             }
 #endif
             if (request.IsFormPost) {
-                this.Result = new {success = false};
+                Result = new {success = false};
             }
         }
 

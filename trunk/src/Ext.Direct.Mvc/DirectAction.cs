@@ -25,7 +25,7 @@ namespace Ext.Direct.Mvc {
     using System.Linq;
     using System.Reflection;
     using System.Web.Mvc;
-    using Ext.Direct.Mvc.Resources;
+    using Resources;
     using Newtonsoft.Json;
 
     public class DirectAction {
@@ -38,9 +38,9 @@ namespace Ext.Direct.Mvc {
         }
 
         public DirectAction(Type type) {
-            this.Name = type.Name;
-            if (this.Name.EndsWith("Controller")) {
-                this.Name = this.Name.Substring(0, this.Name.IndexOf("Controller"));
+            Name = type.Name;
+            if (Name.EndsWith("Controller")) {
+                Name = Name.Substring(0, Name.IndexOf("Controller", StringComparison.InvariantCultureIgnoreCase));
             }
             _methods = new Dictionary<string, DirectMethod>();
             Configure(type);
@@ -56,7 +56,7 @@ namespace Ext.Direct.Mvc {
             foreach (MethodInfo method in methods) {
                 var directMethod = new DirectMethod(method);
                 if (_methods.ContainsKey(directMethod.Name)) {
-                    throw new Exception(String.Format(DirectResources.DirectAction_MethodExists, directMethod.Name, this.Name));
+                    throw new Exception(String.Format(DirectResources.DirectAction_MethodExists, directMethod.Name, Name));
                 }
                 _methods.Add(directMethod.Name, directMethod);
             }

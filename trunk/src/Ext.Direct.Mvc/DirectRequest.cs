@@ -39,12 +39,12 @@ namespace Ext.Direct.Mvc {
 
         public DirectRequest(HttpRequestBase httpRequest) {
             // This constructor is called in case of Form post only
-            this.IsFormPost = true;
-            this.Action = httpRequest[RequestFormAction] ?? String.Empty;
-            this.Method = httpRequest[RequestFormMethod] ?? String.Empty;
-            this.Type = httpRequest[RequestFormType] ?? String.Empty;
-            this.IsFileUpload = Convert.ToBoolean(httpRequest[RequestFileUpload]);
-            this.TransactionId = Convert.ToInt32(httpRequest[RequestFormTransactionId]);
+            IsFormPost = true;
+            Action = httpRequest[RequestFormAction] ?? String.Empty;
+            Method = httpRequest[RequestFormMethod] ?? String.Empty;
+            Type = httpRequest[RequestFormType] ?? String.Empty;
+            IsFileUpload = Convert.ToBoolean(httpRequest[RequestFileUpload]);
+            TransactionId = Convert.ToInt32(httpRequest[RequestFormTransactionId]);
         }
 
         public string Action {

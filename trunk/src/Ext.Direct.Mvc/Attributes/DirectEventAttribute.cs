@@ -20,23 +20,23 @@
  * ***************************************************************************/
 
 namespace Ext.Direct.Mvc {
-    using System.Web;
+    using System;
+    using Resources;
 
-    public class DirectEventResult : DirectResult {
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+    public sealed class DirectEventAttribute : Attribute {
+
+        public DirectEventAttribute(string name) {
+            if (String.IsNullOrEmpty(name)) {
+                throw new ArgumentException(DirectResources.Common_NullOrEmpty, "name");
+            }
+
+            Name = name;
+        }
 
         public string Name {
             get;
-            set;
-        }
-
-        public override void WriteResponse(DirectRequest directRequest, HttpResponseBase httpResponse) {
-            var eventResponse = new DirectEventResponse(directRequest) {
-                Name = this.Name,
-                Data = this.Data,
-                Settings = this.Settings
-            };
-
-            eventResponse.Write(httpResponse, this.ContentType, this.ContentEncoding);
+            private set;
         }
     }
 }

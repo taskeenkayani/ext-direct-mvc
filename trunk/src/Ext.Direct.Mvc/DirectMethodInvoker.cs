@@ -23,7 +23,7 @@ namespace Ext.Direct.Mvc {
     using System;
     using System.Collections.Generic;
     using System.Web.Mvc;
-    using Ext.Direct.Mvc.Resources;
+    using Resources;
 
     public class DirectMethodInvoker : ControllerActionInvoker {
 
