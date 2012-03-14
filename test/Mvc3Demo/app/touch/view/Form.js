@@ -24,11 +24,6 @@
                         name: 'LastName'
                     },
                     {
-                        xtype: 'emailfield',
-                        label: 'Email',
-                        name: 'Email'
-                    },
-                    {
                         xtype: 'datepickerfield',
                         label: 'Birth Date',
                         name: 'BirthDate',
@@ -39,8 +34,8 @@
                     },
                     {
                         xtype: 'checkboxfield',
-                        label: 'Favourite',
-                        name: 'IsFavourite'
+                        label: 'Employed',
+                        name: 'Employed'
                     }
                 ]
             },

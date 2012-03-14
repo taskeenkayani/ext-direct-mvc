@@ -14,9 +14,13 @@ namespace Mvc3Demo.Controllers {
 
         private readonly TestDbContext db = new TestDbContext();
 
-        public ActionResult List() {
-            System.Threading.Thread.Sleep(2000);
-            return Json(db.Contacts.ToList());
+        public ActionResult List(int start, int limit) {
+            var total = db.Contacts.Count();
+            var contacts = db.Contacts.OrderBy(c => c.FirstName).ThenBy(c => c.LastName).Skip(start).Take(limit).ToList();
+            return Json(new {
+                total = total,
+                data = contacts
+            });
         }
 
         public DirectResult Get(int id) {

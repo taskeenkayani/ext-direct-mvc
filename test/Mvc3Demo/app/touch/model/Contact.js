@@ -9,7 +9,7 @@
             {name: 'LastName', type: 'string'},
             {name: 'Email', type: 'string'},
             {name: 'BirthDate', type: 'date', dateFormat: 'c'},
-            {name: 'IsFavourite', type: 'boolean'}
+            {name: 'Employed', type: 'boolean'}
         ]
     }
 });
