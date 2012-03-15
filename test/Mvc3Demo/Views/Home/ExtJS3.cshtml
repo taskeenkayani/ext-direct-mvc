@@ -1,26 +1,13 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>ExtJS3</title>
+    <title>Ext JS 3 examples</title>
     <link href="http://cdn.sencha.io/ext-3.4.0/resources/css/ext-all.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="http://cdn.sencha.io/ext-3.4.0/adapter/ext/ext-base.js"></script>
     <script type="text/javascript" src="http://cdn.sencha.io/ext-3.4.0/ext-all.js"></script>
     <script type="text/javascript" src="@Url.Content("~/directapi")"></script>
     <script type="text/javascript" src="@Url.Content("~/app/extjs3/ContactGrid.js")"></script>
-    <script type="text/javascript">
-        Ext.onReady(function() {
-            Ext.BLANK_IMAGE_URL = 'http://cdn.sencha.io/ext-3.4.0/resources/images/default/s.gif';
-            Ext.Direct.addProvider(Ext.REMOTING_API);
-            Ext.QuickTips.init();
-
-            var grid = new Ext.ux.ContactGrid({
-                width: 500,
-                height: 300,
-                loadMask: true
-            });
-            grid.render('content');
-        });
-    </script>
+    <script type="text/javascript" src="@Url.Content("~/app/extjs3/app.js")"></script>
 </head>
 <body>
     <div id="content" style="padding: 15px"></div>
