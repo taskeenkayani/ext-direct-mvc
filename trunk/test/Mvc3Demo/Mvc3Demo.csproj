@@ -76,7 +76,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\extjs3\app.js" />
     <Content Include="app\extjs3\ContactGrid.js" />
+    <Content Include="app\extjs4\app.js" />
     <Content Include="app\touch\app.js" />
     <Content Include="app\touch\controller\Main.js" />
     <Content Include="app\touch\model\Contact.js" />
