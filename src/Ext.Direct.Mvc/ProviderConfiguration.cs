@@ -52,9 +52,9 @@ namespace Ext.Direct.Mvc {
                     break;
             }
             return converter;
-        } 
+        }
 
-        [ConfigurationProperty("name", IsRequired = false, DefaultValue = "Ext.REMOTING_API")]
+        [ConfigurationProperty("name", IsRequired = false, DefaultValue = "Ext.app.REMOTING_API")]
         public string Name {
             get { return (string)this["name"]; }
         }

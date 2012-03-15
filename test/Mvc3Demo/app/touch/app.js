@@ -3,7 +3,7 @@
     paths: { 'Demo': '/app/touch' }
 });
 
-Ext.direct.Manager.addProvider(Ext.REMOTING_API);
+Ext.direct.Manager.addProvider(Ext.app.REMOTING_API);
 
 Ext.application({
     name: 'Demo',

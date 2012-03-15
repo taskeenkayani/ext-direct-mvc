@@ -49,6 +49,7 @@ namespace Ext.Direct.Mvc {
         private void Configure(Type type) {
             var methods = type.GetMethods()
                 .Where(x =>
+                    x.IsPublic &&
                     (x.ReturnType == typeof(ActionResult) || x.ReturnType.IsSubclassOf(typeof(ActionResult))) &&
                     !x.HasAttribute<DirectIgnoreAttribute>()
                 );

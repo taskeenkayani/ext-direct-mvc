@@ -69,7 +69,11 @@ namespace Ext.Direct.Mvc {
                 _actions = new Dictionary<string, DirectAction>();
                 var assemblies = BuildManager.GetReferencedAssemblies();
                 foreach (Assembly assembly in assemblies) {
-                    var types = assembly.GetTypes().Where(type => type.IsSubclassOf(typeof(DirectController)) && !type.HasAttribute<DirectIgnoreAttribute>());
+                    var types = assembly.GetTypes().Where(type =>
+                        type.IsPublic &&
+                        type.IsSubclassOf(typeof(DirectController)) &&
+                        !type.HasAttribute<DirectIgnoreAttribute>()
+                    );
                     foreach (Type type in types) {
                         var action = new DirectAction(type);
                         if (_actions.ContainsKey(action.Name)) {
@@ -138,7 +142,12 @@ namespace Ext.Direct.Mvc {
                 writer.WriteEndObject();
             }
 
-            return json ? sb.ToString() : String.Format("{0}={1};", Name ?? config.Name, sb);
+            string name = Name ?? config.Name;
+            if (name.Contains('.')) {
+                name = String.Format("Ext.ns(\"{0}\");\n{1}", name.Substring(0, name.LastIndexOf('.')), name);
+            }
+
+            return json ? sb.ToString() : String.Format("{0}={1};", name, sb);
         }
 
         #endregion
