@@ -4,10 +4,45 @@
     <title>Ext JS 4 examples</title>
     <link href="@Url.Content("~/scripts/extjs-4.1/resources/css/ext-all.css")" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="@Url.Content("~/scripts/extjs-4.1/ext-all-debug.js")"></script>
+    <link href="@Url.Content("~/resources/css/demo.css")" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="@Url.Content("~/directapi")"></script>
     <script type="text/javascript" src="@Url.Content("~/app/extjs4/app.js")"></script>
 </head>
 <body>
-    <div id="content" style="padding: 15px"></div>
+<body>
+    <div>
+        <h1>Basic Demo</h1>
+        <p>Click the button below to call a direct function and pass a string, a date and a Contact object as separate arguments.</p>
+        <p><button id="basicBtn">Click me</button></p>
+        <p id="echoedData"></p>
+        <p>Click the button below call a similar function and pass the same data, but as named arguments (single object literal).<br />Note that the method on the server is marked with [NamedArguments] attribute.</p>
+        <p><button id="namedArgsBtn">Click me</button></p>
+        <p id="echoedData2"></p>
+        <p>Click the button below to call a direct function that throws an exception on the server.</p>
+        <p><button id="exceptionBtn">Throw a server-side exception</button></p>
+    </div>
+    <br/>
+    <div>
+        <h1>Grid Demo</h1>
+        <p>Ext.grid.Panel component with remote paging. This grid uses Ext.data.proxy.Direct to fetch data.</p>
+        <p id="gridCt"></p>
+    </div>
+    <br/>
+    <div>
+        <h1>Form Demo</h1>
+        <p id="formCt"></p>
+    </div>
+    <br/>
+    <div>
+        <h1>Tree Demo</h1>
+        <p>Ext.tree.Panel with remote loading. This tree uses Ext.data.proxy.Direct to fetch data.</p>
+        <p id="treeCt"></p>
+    </div>
+    <br/>
+    <div>
+        <h1>File Upload Demo</h1>
+        <p id="fileFormCt"></p>
+    </div>
+</body>
 </body>
 </html>

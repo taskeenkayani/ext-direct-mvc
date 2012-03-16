@@ -66,8 +66,7 @@ namespace Ext.Direct.Mvc {
         }
 
         private static string GetErrorLocation(Exception exception) {
-            string stackTrace = exception.StackTrace.Replace("\r\n", "<br />").Replace("at ", "*&#160;");
-            return String.Format("[{0}]<br />{1}", exception.GetType(), stackTrace);
+            return String.Format("{0}\n{1}", exception.GetType(), exception.StackTrace);
         }
     }
 }

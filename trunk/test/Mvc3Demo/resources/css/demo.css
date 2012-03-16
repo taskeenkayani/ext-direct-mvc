@@ -1,0 +1,18 @@
+﻿body {
+    padding:20px;
+    font-family:helvetica,tahoma,verdana,sans-serif;
+    font-size:13px;
+}
+p {
+    margin-bottom:15px;
+}
+h1 {
+    font-size:18px;
+    margin-bottom:20px;
+}
+h2 {
+    font-size:14px;
+    color:#333;
+    font-weight:bold;
+    margin:10px 0;
+}

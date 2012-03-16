@@ -10,7 +10,7 @@ Ext.application({
 
     models: ['Contact'],
     stores: ['Contacts'],
-    views: ['Main', 'Menu', 'Basic', 'List', 'Form'],
+    views: ['Main'],
     controllers: ['Main'],
 
     launch: function () {

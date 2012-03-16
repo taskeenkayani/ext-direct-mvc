@@ -59,6 +59,7 @@ namespace Ext.Direct.Mvc {
             get { return (string)this["name"]; }
         }
 
+        // Optional namespace for generated proxy methods.
         [ConfigurationProperty("namespace", IsRequired = false)]
         public string Namespace {
             get { return (string)this["namespace"]; }
@@ -85,11 +86,13 @@ namespace Ext.Direct.Mvc {
             get { return (int?)this["timeout"]; }
         }
 
+        // The format in which DateTime objects should be returned. Valid values are "Iso", "JS" or "JavaScript". All case insensitive.
         [ConfigurationProperty("dateFormat", IsRequired = false, DefaultValue = "Iso")]
         public string DateFormat {
             get { return (string)this["dateFormat"]; }
         }
 
+        // Turns debug mode on if set to true. For development only! Set it to false on production environment.
         [ConfigurationProperty("debug", IsRequired = false, DefaultValue = false)]
         public bool Debug {
             get { return (bool)this["debug"]; }

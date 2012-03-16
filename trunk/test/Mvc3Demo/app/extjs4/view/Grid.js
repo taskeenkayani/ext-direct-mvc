@@ -1,7 +1,6 @@
 ﻿Ext.define('Demo.view.Grid', {
     extend: 'Ext.grid.Panel',
     title: 'Contacts',
-    frame: true,
     stripeRows: true,
     store: 'Contacts',
     columns: [

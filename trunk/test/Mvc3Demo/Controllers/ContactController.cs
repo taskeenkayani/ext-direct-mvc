@@ -24,7 +24,7 @@ namespace Mvc3Demo.Controllers {
         }
 
         public DirectResult Get(int id) {
-            Contact contact = db.Contacts.Single(c => c.ID == id);
+            var contact = db.Contacts.Single(c => c.ID == id);
             return Json(contact);
         }
 
