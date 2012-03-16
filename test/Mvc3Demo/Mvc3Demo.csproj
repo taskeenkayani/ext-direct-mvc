@@ -65,8 +65,11 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\BasicController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\FormController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TreeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -77,21 +80,28 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\extjs3\app.js" />
+    <Content Include="app\extjs3\BasicTree.js" />
+    <Content Include="app\extjs3\ContactForm.js" />
     <Content Include="app\extjs3\ContactGrid.js" />
+    <Content Include="app\extjs3\FileForm.js" />
     <Content Include="app\extjs4\app.js" />
     <Content Include="app\extjs4\model\Contact.js" />
     <Content Include="app\extjs4\store\Contacts.js" />
+    <Content Include="app\extjs4\store\Tree.js" />
+    <Content Include="app\extjs4\view\FileForm.js" />
+    <Content Include="app\extjs4\view\Form.js" />
     <Content Include="app\extjs4\view\Grid.js" />
+    <Content Include="app\extjs4\view\Tree.js" />
     <Content Include="app\touch\app.js" />
     <Content Include="app\touch\controller\Main.js" />
     <Content Include="app\touch\model\Contact.js" />
     <Content Include="app\touch\store\Contacts.js" />
-    <Content Include="app\touch\view\Basic.js" />
     <Content Include="app\touch\view\Form.js" />
     <Content Include="app\touch\view\List.js" />
     <Content Include="app\touch\view\Main.js" />
     <Content Include="app\touch\view\Menu.js" />
     <Content Include="Global.asax" />
+    <Content Include="resources\css\demo.css" />
     <Content Include="scripts\extjs-4.1\ext-all-debug.js" />
     <Content Include="scripts\extjs-4.1\ext-all.js" />
     <Content Include="scripts\extjs-4.1\resources\css\ext-all.css" />
@@ -475,6 +485,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Uploaded Files\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Ext.Direct.Mvc\Ext.Direct.Mvc3.csproj">

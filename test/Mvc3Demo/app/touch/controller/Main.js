@@ -35,6 +35,9 @@
     },
 
     saveForm: function () {
+        // Unlike Ext JS in Sencha Touch 2 a Form cannot be submitted using Direct API,
+        // therefore we have to manually call the method and pass form values.
+
         var form = this.getForm();
         var contact = form.getRecord();
         contact.set(form.getValues());

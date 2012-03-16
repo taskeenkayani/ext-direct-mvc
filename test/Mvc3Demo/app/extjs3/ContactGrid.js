@@ -1,7 +1,6 @@
 ﻿Ext.ux.ContactGrid = Ext.extend(Ext.grid.GridPanel, {
     title: 'Contacts',
     pageSize: 10,
-    frame: true,
     viewConfig: {
         autoFill: true
     },
