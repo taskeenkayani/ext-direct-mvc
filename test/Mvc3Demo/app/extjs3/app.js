@@ -14,6 +14,7 @@
 
         Basic.Echo("lorem ipsum dolor sit amet", new Date(), contact, function(data) {
             var html = [
+                '<b>Echoed data</b>',
                 'String: ' + data.text,
                 'Date: ' + Date.parseDate(data.date, 'c').format('l, F d, Y g:i:s A'),
                 'Contact: ' + Ext.encode(data.contact)
