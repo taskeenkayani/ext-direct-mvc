@@ -23,8 +23,9 @@
             Ext.get('basicEchoedData').update(html);
         });
     });
-    
+
     // SERVER-SIDE EXCEPTION
+    // BasicController.TestException method throws an exception.
     Ext.get('exceptionBtn').on('click', Basic.TestException);
     
     // exception event listener handles ALL server side exceptions and should only be set once in your code.
@@ -50,7 +51,6 @@
             });
         }
     });
-
 
     // GRID
     var grid = new Ext.ux.ContactGrid({
