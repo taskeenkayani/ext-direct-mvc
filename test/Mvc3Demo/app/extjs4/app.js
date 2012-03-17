@@ -3,8 +3,6 @@
     paths: { 'Demo': '/app/extjs4' }
 });
 
-Ext.direct.Manager.addProvider(Ext.app.REMOTING_API);
-
 Ext.require([
     'Demo.model.Contact',
     'Demo.store.Contacts',
@@ -15,6 +13,8 @@ Ext.require([
     'Demo.view.FileForm'
 ]);
 
+Ext.direct.Manager.addProvider(Ext.app.REMOTING_API);
+
 Ext.application({
     name: 'Demo',
     
@@ -22,6 +22,7 @@ Ext.application({
     stores: ['Contacts', 'Tree'],
 
     launch: function () {
+        
         // BASIC
         Ext.get('basicBtn').on('click', function() {
             var contact = {

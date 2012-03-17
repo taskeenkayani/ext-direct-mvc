@@ -2,7 +2,6 @@
     title: 'Contact',
     padding: 10,
     labelWidth: 80,
-    
     defaults: {
         anchor: '100%'
     },
