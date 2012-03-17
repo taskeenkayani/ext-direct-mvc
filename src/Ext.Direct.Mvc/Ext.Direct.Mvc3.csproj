@@ -80,9 +80,7 @@
     <Compile Include="Attributes\DirectIgnoreAttribute.cs" />
     <Compile Include="Attributes\NamedArgumentsAttributes.cs" />
     <Compile Include="DirectRouterController.cs" />
-    <Compile Include="DirectAction.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="DirectAction.cs" />
     <Compile Include="DirectController.cs" />
     <Compile Include="DirectApiController.cs" />
     <Compile Include="DirectErrorResponse.cs" />
