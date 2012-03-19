@@ -97,7 +97,7 @@ Configuration
 -------------------------------------------------------------------------------
 By default no configuration is required at all to use Ext.Direct.Mvc. However,
 you can customize certain things in web.config of your project. What you need
-to do is create ext.direct section, like this:
+to do is create ext.direct section. Here is an example:
 
 <configuration>
     <configSections>
@@ -128,15 +128,15 @@ The following settings can be changed and all of them are optional:
 * timeout - The timeout to use for each request. If not specified then the
     default value defined by Ext JS will be used, which I don't remember :)
 * dateFormat - The format in which DateTime objects should be returned. Valid
-    values are "Iso", "JS" or "JavaScript", case insensitive. Anything else
-    will format the dates to the ugly M$ format. Default is "Iso".
+    values are "ISO", "JS" or "JavaScript", case insensitive. Anything else
+    will format the dates using the ugly M$ format. Default is "ISO".
 * debug - Boolean. Set to true to include full stack trace in the exception
     response when an intercepted server exception is returned to the client.
     Default is false. Generally you don't need to set it, because stack trace
     is always included when you run your project in Debug mode. However, this
     can be helpful when an obscure server-side exception occurs only on
     production environment and cannot be reproduced locally, so temporary
-    setting this option cen help find the exact locaiton of the problem.
+    setting this option can help find the exact location of the problem.
     But it should NEVER be left set to true on production environment because
     of security concerns!!!
 
