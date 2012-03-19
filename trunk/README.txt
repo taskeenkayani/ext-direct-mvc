@@ -82,7 +82,7 @@ Here's how to quickly start using Ext.Direct.Mvc in your project:
 
 4. Make controllers inherit DirectController as opposed to just Controller.
 
-5. Return data from controller actions by calling one of the overriden Json
+5. Return data from controller actions by calling one of the overridden Json
    methods. Actions that process form posts must be marked with [FormHandler]
    attribute.
 
@@ -146,7 +146,7 @@ By default client-side stub methods are generated for all public actions in any
 controller that derives from DirectController. Most of the time it is what you
 want, but sometimes it is needed to exclude entire controller or individual
 actions from Ext Direct, so that stub methods will not be generated. This can
-be done by marking the actions or the controller with [DirectIgnore] attrubute,
+be done by marking the actions or the controller with [DirectIgnore] attribute,
 it will instruct Ext.Direct.Mvc to ignore them when creating the API object.
 
 Handling server-side exceptions on the client
@@ -205,7 +205,7 @@ Ext.Direct.on('exception', function(error) {
 
 Server-side events
 -------------------------------------------------------------------------------
-Ext.Direct supports custom server-side events. Mark an acton that should return
+Ext.Direct supports custom server-side events. Mark an action that should return
 an event with [DirectEvent] attribute to wrap its returned value in a special
 event response object and handle it on the client as described in the
 documentation for Direct manager.
@@ -224,7 +224,7 @@ to know:
 * No configuration is required if you are happy with the defaults
 * Default date format changed from the ugly M$ to the universal ISO
 * Controllers that participate in Ext Direct must derive from DirectController.
-  It's a new class in v3.0.0 and it contains overriden Json methods.
+  It's a new class in v3.0.0 and it contains overridden Json methods.
 * Descriptor generation method has been dropped (OptIn and OptOut)
 * DirectInclude attribute has been dropped
 * Controller extension methods (Direct and DirectEvent) have been dropper. Now
