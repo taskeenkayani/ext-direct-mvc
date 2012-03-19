@@ -1,5 +1,7 @@
 #summary How to configure and use Ext.Direct.Mvc library.
-#labels Featured,Phase-Deploy,Phase-Implementation
+#labels Deprecated,Phase-Deploy,Phase-Implementation
+
+UPDATE: ONLY RELEVANT TO VERSION 2.2.0 AND EARLIER.
 
 == Introduction ==
 
