@@ -138,4 +138,7 @@
   <data name="DirectProvider_WrongNumberOfArguments" xml:space="preserve">
     <value>Number of arguments does not match the definition of method {0} in action {1}.</value>
   </data>
+  <data name="JsonRequest_GetNotAllowed" xml:space="preserve">
+    <value>This request has been blocked because sensitive information could be disclosed to third party web sites when this is used in a GET request. To allow GET requests, set JsonRequestBehavior to AllowGet.</value>
+  </data>
 </root>

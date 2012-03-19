@@ -88,7 +88,6 @@ namespace Ext.Direct.Mvc {
                 } else {
                     httpResponse.ContentType = "application/json";
                 }
-
                 if (contentEncoding != null) {
                     httpResponse.ContentEncoding = contentEncoding;
                 }

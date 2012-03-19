@@ -23,6 +23,7 @@ namespace Ext.Direct.Mvc {
     using System;
     using System.Web;
     using System.Web.Mvc;
+    using Resources;
     using Newtonsoft.Json;
 
     public class DirectResult : JsonResult {
@@ -35,6 +36,10 @@ namespace Ext.Direct.Mvc {
         public override void ExecuteResult(ControllerContext context) {
             if (context == null) {
                 throw new ArgumentNullException("context");
+            }
+            if (JsonRequestBehavior == JsonRequestBehavior.DenyGet &&
+                String.Equals(context.HttpContext.Request.HttpMethod, "GET", StringComparison.OrdinalIgnoreCase)) {
+                throw new InvalidOperationException(DirectResources.JsonRequest_GetNotAllowed);
             }
 
             HttpResponseBase httpResponse = context.HttpContext.Response;
@@ -74,13 +79,13 @@ namespace Ext.Direct.Mvc {
             } else {
                 response.ContentType = "application/json";
             }
-
             if (ContentEncoding != null) {
                 response.ContentEncoding = ContentEncoding;
             }
 
             if (Data != null) {
                 if (Data is String) {
+                    // write strings directly to avoid double quotes around them caused by JsonSerializer
                     response.Write(Data);
                 } else {
                     using (JsonWriter writer = new JsonTextWriter(response.Output)) {

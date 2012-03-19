@@ -8,7 +8,7 @@ Ext.Direct.Mvc is an implementation of Ext Direct server-side stack for
 ASP.NET MVC. Ext Direct is a platform and language agnostic technology to
 remote server-side methods to the client-side. Ext Direct allows for seamless
 communication between the client-side of an Ext JS application and all popular
-server platforms. For more information about Ext Direct visit 
+server platforms. For more information about Ext Direct visit
 http://www.sencha.com/products/extjs/extdirect
 
 Official thread on Sencha forums:
@@ -118,7 +118,8 @@ The following settings can be set:
 * timeout - The timeout to use for each request. If not specified then the
     default value defined by Ext JS will be used, which I don't remember :)
 * dateFormat - The format in which DateTime objects should be returned. Valid
-    values are "Iso", "JS" or "JavaScript", case insensitive. Default is "Iso"
+    values are "Iso", "JS" or "JavaScript", case insensitive. Anything else
+    will format the dates to the ugly M$ format. Default is "Iso".
 * debug - Boolean. Set to true to include full stack trace in the exception
     response when an intercepted server exception is returned to the client.
     Default is false. Generally you don't need to set it, because stack trace
@@ -163,7 +164,7 @@ Exception response on the client can contain the following members:
 * message - The error message
 * where - The full stack trace from the server, available during debugging
 * result - Simple object with only "success" boolean property for form posts
-* errorData - User-defined information about the exception only if provided 
+* errorData - User-defined information about the exception only if provided
 
 The errorData is copied from Exception.Data. To read about Exception.Data and
 how to set it visit this page:
