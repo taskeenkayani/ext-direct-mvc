@@ -1,22 +1,31 @@
-﻿ABOUT
+﻿In this file:
+
+- About
+- Requirements
+- Quick start
+- Advanced configuration and usage
+- Upgrading from earlier versions
+
+
+ABOUT
 ===============================================================================
 
 Ext.Direct.Mvc
-Copyright (c) 2010 Eugene Lishnevsky. All Rights Reserved.
+Copyright (c) 2012 Eugene Lishnevsky. All Rights Reserved.
 
 Ext.Direct.Mvc is an implementation of Ext Direct server-side stack for
 ASP.NET MVC. Ext Direct is a platform and language agnostic technology to
 remote server-side methods to the client-side. Ext Direct allows for seamless
 communication between the client-side of an Ext JS application and all popular
 server platforms. For more information about Ext Direct visit
-http://www.sencha.com/products/extjs/extdirect
+http://www.sencha.com/products/extjs/extdirect.
 
 Official thread on Sencha forums:
 http://www.sencha.com/forum/showthread.php?72245-Ext.Direct-for-ASP.NET-MVC
 
 License:
 Ext.Direct.Mvc is licensed under the terms of the GNU Lesser General Public
-License version 3.  A copy of the license can be found in the copying.txt and
+License version 3. A copy of the license can be found in the copying.txt and
 copying_lesser.txt files included in this distribution.
 
 Author:
@@ -27,6 +36,7 @@ mailto:elishnevsky@gmail.com
 REQUIREMENTS
 ===============================================================================
 
+Ext.Direct.Mvc is currently built to work with ASP.NET MVC 2 and 3.
 To compile the binaries yourself you need:
 
 Microsoft Visual Studio 2010 SP1
@@ -70,14 +80,14 @@ Here's how to quickly start using Ext.Direct.Mvc in your project:
    // or in Ext JS 3
    Ext.Direct.addProvider(Ext.app.REMOTING_API);
 
-4. Make controllers derive from DirectController as opposed to just Controller.
+4. Make controllers inherit DirectController as opposed to just Controller.
 
 5. Return data from controller actions by calling one of the overriden Json
    methods. Actions that process form posts must be marked with [FormHandler]
    attribute.
 
 That's it! Now you can call your controller actions directly from your
-JavaScript code.
+JavaScript code through the created stub methods.
 
 
 ADVANCED CONFIGURATION AND USAGE
@@ -106,15 +116,15 @@ to do is create ext.direct section, like this:
     ...
 </configuration>
 
-The following settings can be set:
+The following settings can be changed and all of them are optional:
 * name - Custom name for the remoting API (default: Ext.app.REMOTING_API)
-* namespace - Optional namespace for generated proxy methods
+* namespace - Namespace for generated proxy methods. Default is no namespace.
 * buffer - Number that specifies the amount of time in milliseconds to wait
     before sending a batched request. If not specified then the default
-    value, configured by Ext JS will be used, which is 10
+    value, configured by Ext JS will be used, which is 10.
 * maxRetries - Number of times to re-attempt delivery on failure of a call.
     If not specified then the default value, configured by Ext JS will be used,
-    which is 1
+    which is 1.
 * timeout - The timeout to use for each request. If not specified then the
     default value defined by Ext JS will be used, which I don't remember :)
 * dateFormat - The format in which DateTime objects should be returned. Valid
@@ -201,7 +211,7 @@ event response object and handle it on the client as described in the
 documentation for Direct manager.
 
 
-UPGRADE FROM EARLIER VERSIONS
+UPGRADING FROM EARLIER VERSIONS
 ===============================================================================
 
 Although Ext.Direct.Mvc v3.0.0 is written to be extremely easy to use when you
