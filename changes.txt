@@ -4,7 +4,7 @@
 * No configuration is required by default
 * Dropped assembly and descriptorGeneration configuration settings
 * Added support for named arguments
-* Dropped controller extension methods (Direct and DirectEvents)
+* Dropped controller extension methods (Direct and DirectEvent)
 * Controllers now must derive from DirectController
 * Overrode Json controller methods that now must be called to return data from
   controller actions
