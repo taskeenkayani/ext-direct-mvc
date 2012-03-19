@@ -1,6 +1,13 @@
 #summary How to set up and use Ext.Direct.Mvc
 #labels Featured,Phase-Implementation,Phase-Deploy
 
+=On this page:=
+
+  * Requirements
+  * Quick Start
+  * Advanced configuration and usage
+  * Upgrading from earlier versions
+
 =Requirements=
 
 Ext.Direct.Mvc is currently built to work with ASP.NET MVC 2 and 3.
