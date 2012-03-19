@@ -20,7 +20,7 @@ namespace Mvc3Demo.Controllers {
             return Json(new {
                 total = total,
                 data = contacts
-            });
+            }, JsonRequestBehavior.AllowGet);
         }
 
         public DirectResult Get(int id) {
