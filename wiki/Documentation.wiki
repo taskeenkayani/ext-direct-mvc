@@ -3,7 +3,7 @@
 
 =On this page:=
 
-  * [Requirements# Requirements]
+  * Requirements
   * Quick Start
   * Advanced configuration and usage
   * Upgrading from earlier versions
