@@ -74,7 +74,7 @@ The following settings can be changed and all of them are optional:
   * maxRetries - Number of times to re-attempt delivery on failure of a call. If not specified then the default value, configured by Ext JS will be used, which is 1.
   * timeout - The timeout to use for each request. If not specified then the default value defined by Ext JS will be used, which I don't remember :)
   * dateFormat - The format in which DateTime objects should be returned. Valid values are "ISO", "JS" or "JavaScript", all case insensitive. Anything else will format the dates using the ugly M$ format. Default is "ISO".
-  * debug - Boolean. Set to true to include full stack trace in the exception response when an intercepted server exception is returned to the client. Default is false. Generally you don't need to set it, because stack trace is always included when you run your project in Debug mode. However, this can be helpful when an obscure server-side exception occurs only on production environment and cannot be reproduced locally, so temporary setting this option can help find the exact location of the problem. But it should NEVER be left set to true on production environment because of security concerns!!!
+  * debug - Boolean. Set to true to include full stack trace in the exception response when an intercepted server exception is returned to the client. Default is false. It should NEVER be set to true on production environment because of security concerns!!!
 
 ==Excluding controllers or action from Ext Direct==
 By default client-side stub methods are generated for all public actions in any controller that derives from DirectController. Most of the time it is what you want, but sometimes it is needed to exclude entire controller or individual actions from Ext Direct, so that stub methods will not be generated. This can be done by marking the actions or the controller with [DirectIgnore] attrubute, it will instruct Ext.Direct.Mvc to ignore them when creating the API object.
@@ -118,7 +118,7 @@ or globally
 {{{
 // in Ext JS 4 or Sencha Touch 2
 Ext.direct.Manager.on('exception', function(error) {
-    console.error(String.format('{0}\n{1}', error.message, error.where));
+    console.error(Ext.util.Format.format('{0}\n{1}', error.message, error.where));
 });
 
 // or in Ext JS 3
