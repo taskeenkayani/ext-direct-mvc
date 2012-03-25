@@ -132,13 +132,8 @@ The following settings can be changed and all of them are optional:
     will format the dates using the ugly M$ format. Default is "ISO".
 * debug - Boolean. Set to true to include full stack trace in the exception
     response when an intercepted server exception is returned to the client.
-    Default is false. Generally you don't need to set it, because stack trace
-    is always included when you run your project in Debug mode. However, this
-    can be helpful when an obscure server-side exception occurs only on
-    production environment and cannot be reproduced locally, so temporary
-    setting this option can help find the exact location of the problem.
-    But it should NEVER be left set to true on production environment because
-    of security concerns!!!
+    Default is false. It should NEVER be set to true on production environment
+    because of security concerns!!!
 
 Excluding controllers or action from Ext Direct
 -------------------------------------------------------------------------------
@@ -193,9 +188,9 @@ Employees.Get(1234, function(result, event) {
 
 or globally
 
-// in Ext JS 4 or Sencha Touch 2
+// in Ext JS 4
 Ext.direct.Manager.on('exception', function(error) {
-    console.error(String.format('{0}\n{1}', error.message, error.where));
+    console.error(Ext.util.Format.format('{0}\n{1}', error.message, error.where));
 });
 
 // or in Ext JS 3
