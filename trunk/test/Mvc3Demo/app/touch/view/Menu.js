@@ -4,11 +4,15 @@
 
     config: {
         title: 'Menu',
+        ui: 'round',
         store: {
-            fields: ['text', 'class'],
+            fields: ['text', 'xclass'],
+            proxy: {
+                type: 'memory'
+            },
             data: [
-                ['List', 'Demo.view.List'],
-                ['Form', 'Demo.view.Form']
+                {text: 'List', xclass: 'Demo.view.List'},
+                {text: 'Form', xclass: 'Demo.view.Form'}
             ]
         }
     }
