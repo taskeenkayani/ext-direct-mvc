@@ -11,7 +11,8 @@
         },
         control: {
             demomenu: {
-                itemtap: 'onMenuItemTap'
+                itemtap: 'onMenuItemTap',
+                activate: 'onMenuActivate'
             },
             loadButton: {
                 tap: 'loadForm'
@@ -23,8 +24,12 @@
     },
 
     onMenuItemTap: function (list, index, target, record) {
-        var item = Ext.create(record.get('class'));
+        var item = Ext.create(record.get('xclass'));
         this.getMain().push(item);
+    },
+    
+    onMenuActivate: function (list) {
+        Ext.defer(list.deselectAll, 500, list);
     },
 
     loadForm: function () {
